@@ -65,17 +65,32 @@ async function receiveHostMessage(connection,message) {
   }
   const player=hostSession.players.find(x=>x.id===connection.playerId);
   if(!player)return connection.send({type:'error',message:'Спочатку зареєструйтеся'});
-  if(message.type==='answer')acceptAnswer(player,Number(message.answerIndex),connection);
+  if (message.type === 'answer') acceptAnswer(player, message, connection);
 }
 function activePlayers(){return hostSession.players.filter(p=>p.connected);}
-function acceptAnswer(player,answerIndex,connection){
-  if(hostSession.status!=='question'||!Number.isInteger(answerIndex)||answerIndex<0||answerIndex>3||Date.now()>hostSession.deadline||hostSession.answers.has(player.id))return;
-  hostSession.answers.set(player.id,{answerIndex,answeredAt:Date.now()});connection.send({type:'answerAccepted'});renderHost();
+function acceptAnswer(player, message, connection) {
+  const { answerIndex, questionIndex } = message;
+  const session = hostSession;
+  const answeredAt = Date.now();
+  if (session.status !== 'question' || answeredAt >= session.deadline ||
+      (questionIndex !== undefined && questionIndex !== session.questionIndex)) {
+    connection.send(publicState(player.id));
+    return;
+  }
+  if (session.answers.has(player.id)) {
+    connection.send({ type: 'answerAccepted' });
+    return;
+  }
+  const answers = session.quiz.questions[session.questionIndex].answers;
+  if (!Number.isInteger(answerIndex) || answerIndex < 0 || answerIndex >= answers.length) return;
+  session.answers.set(player.id, { answerIndex, answeredAt });
+  connection.send({ type: 'answerAccepted' });
+  renderHost();
   const active=activePlayers();if(active.length&&active.every(p=>hostSession.answers.has(p.id)))revealQuestion(true);
 }
 function publicState(playerId){
   const s=hostSession,q=s.questionIndex>=0?s.quiz.questions[s.questionIndex]:null,revealed=s.status==='result',p=s.players.find(x=>x.id===playerId);
-  return {type:'state',pin:s.pin,quizTitle:s.quiz.title,status:s.status,questionIndex:s.questionIndex,total:s.quiz.questions.length,deadline:s.deadline,allAnswered:s.allAnswered,question:q?{text:q.text,image:q.image,answers:s.status==='reading'?[]:q.answers.map(({text,image,tile,color,correct})=>({text,image,tile,color,...(revealed?{correct}:{})}))}:null,players:s.players.map(x=>({id:x.id,name:x.name,score:x.score})),ownScore:p?.score||0,roundPoints:p?.roundPoints||0,answered:s.answers.has(playerId)};
+  return {type:'state',pin:s.pin,quizTitle:s.quiz.title,status:s.status,questionIndex:s.questionIndex,total:s.quiz.questions.length,deadline:s.deadline,remainingMs:remainingTime(s.deadline),allAnswered:s.allAnswered,question:q?{text:q.text,image:q.image,answers:s.status==='reading'?[]:q.answers.map(({text,image,tile,color,correct})=>({text,image,tile,color,...(revealed?{correct}:{})}))}:null,players:s.players.map(x=>({id:x.id,name:x.name,score:x.score})),ownScore:p?.score||0,roundPoints:p?.roundPoints||0,answered:s.answers.has(playerId)};
 }
 function broadcast(){if(!hostSession)return;for(const [id,c] of hostSession.connections)if(c.open)c.send(publicState(id));renderHost();}
 function startGame(){if(!hostSession.players.length)return toast('Дочекайтеся хоча б одного гравця');hostSession.questionIndex=-1;nextQuestion();}
@@ -121,10 +136,7 @@ function startClock(remainingMs) {
   const tick = () => {
     const seconds = Math.max(0, Math.ceil((deadline - performance.now()) / 1000));
     timer.textContent = seconds;
-    if (seconds === 0) {
-      clearInterval(clockTimer);
-      document.querySelectorAll('[data-answer]').forEach(button => { button.disabled = true; });
-    }
+    if (seconds === 0) clearInterval(clockTimer);
   };
   clockTimer = setInterval(tick, 150);
   tick();
@@ -288,7 +300,7 @@ function receivePlayerMessage(message,pin){
 function renderPlayer(state, pin) {
   const { status, question, questionIndex, total } = state;
   const submission = state.answered ? { points: state.roundPoints } : null;
-  const remainingMs = remainingTime(state.deadline);
+  const remainingMs = state.remainingMs === undefined ? remainingTime(state.deadline) : state.remainingMs;
   if (status === 'lobby') {
     app.innerHTML = `<div class="join"><div class="join-card notice"><div class="big">✨</div><h1>Ви в грі!</h1>
       <p>Чекаємо, поки ведучий запустить вікторину.</p><span class="tag">PIN ${pin}</span> ${fullscreenButton()}</div></div>`;
@@ -317,7 +329,7 @@ function renderPlayer(state, pin) {
     button.onclick = () => {
       if (!playerConnection?.open) return toast('Зв’язок із ведучим перервано');
       document.querySelectorAll('[data-answer]').forEach(card => { card.disabled = true; });
-      playerConnection.send({ type: 'answer', answerIndex: Number(button.dataset.answer) });
+      playerConnection.send({ type: 'answer', questionIndex, answerIndex: Number(button.dataset.answer) });
     };
   });
   startClock(remainingMs);
