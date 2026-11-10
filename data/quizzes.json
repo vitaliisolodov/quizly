@@ -85,33 +85,33 @@
     "questions": [
       {
         "text": "Який пристрій може заглушити радіозв'язок бездротової колонки?",
-        "image": "/assets/quiz-kahoot/1-question.png",
+        "image": "/assets/quiz-kahoot/1-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Перфоратор із Wi-Fi",
-            "image": "/assets/quiz-kahoot/1-answers.png",
+            "image": "/assets/quiz-kahoot/1-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Лазерний глушник для вух",
-            "image": "/assets/quiz-kahoot/1-answers.png",
+            "image": "/assets/quiz-kahoot/1-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Підсилювач басів",
-            "image": "/assets/quiz-kahoot/1-answers.png",
+            "image": "/assets/quiz-kahoot/1-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Глушилка (джаммер)",
-            "image": "/assets/quiz-kahoot/1-answers.png",
+            "image": "/assets/quiz-kahoot/1-answers.webp",
             "tile": 3,
             "correct": true,
             "color": "#b695ff"
@@ -121,33 +121,33 @@
       },
       {
         "text": "Який із цих паролів є одним із найпоширеніших у світі?",
-        "image": "/assets/quiz-kahoot/2-question.png",
+        "image": "/assets/quiz-kahoot/2-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "nure_the_best_2026",
-            "image": "/assets/quiz-kahoot/2-answers.png",
+            "image": "/assets/quiz-kahoot/2-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "X$9#mK2!vP",
-            "image": "/assets/quiz-kahoot/2-answers.png",
+            "image": "/assets/quiz-kahoot/2-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "qwerty_super_god_mode",
-            "image": "/assets/quiz-kahoot/2-answers.png",
+            "image": "/assets/quiz-kahoot/2-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "123456",
-            "image": "/assets/quiz-kahoot/2-answers.png",
+            "image": "/assets/quiz-kahoot/2-answers.webp",
             "tile": 3,
             "correct": true,
             "color": "#b695ff"
@@ -156,33 +156,33 @@
       },
       {
         "text": "Що означає «чарівний дим», який виходить із перегрітої мікросхеми?",
-        "image": "/assets/quiz-kahoot/3-question.png",
+        "image": "/assets/quiz-kahoot/3-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Дух Ніколи Тесли вилітає",
-            "image": "/assets/quiz-kahoot/3-answers.png",
+            "image": "/assets/quiz-kahoot/3-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Увімкнення бездротової зарядки",
-            "image": "/assets/quiz-kahoot/3-answers.png",
+            "image": "/assets/quiz-kahoot/3-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Перегрів і термічне руйнування",
-            "image": "/assets/quiz-kahoot/3-answers.png",
+            "image": "/assets/quiz-kahoot/3-answers.webp",
             "tile": 2,
             "correct": true,
             "color": "#54dcb0"
           },
           {
             "text": "Оновлення прошивки до PRO",
-            "image": "/assets/quiz-kahoot/3-answers.png",
+            "image": "/assets/quiz-kahoot/3-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -191,33 +191,33 @@
       },
       {
         "text": "Як називається ефект екранування електромагнітних хвиль металевою оболонкою?",
-        "image": "/assets/quiz-kahoot/4-question.png",
+        "image": "/assets/quiz-kahoot/4-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Ефект Бермудського трикутника",
-            "image": "/assets/quiz-kahoot/4-answers.png",
+            "image": "/assets/quiz-kahoot/4-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Екранування кліткою Фарадея",
-            "image": "/assets/quiz-kahoot/4-answers.png",
+            "image": "/assets/quiz-kahoot/4-answers.webp",
             "tile": 1,
             "correct": true,
             "color": "#ffc857"
           },
           {
             "text": "Захист першого рівня",
-            "image": "/assets/quiz-kahoot/4-answers.png",
+            "image": "/assets/quiz-kahoot/4-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Магнітний панцир",
-            "image": "/assets/quiz-kahoot/4-answers.png",
+            "image": "/assets/quiz-kahoot/4-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -226,33 +226,33 @@
       },
       {
         "text": "Що найбільше заважає поширенню Wi-Fi 5 ГГц у квартирі?",
-        "image": "/assets/quiz-kahoot/5-question.png",
+        "image": "/assets/quiz-kahoot/5-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Бетонні стіни з арматурою",
-            "image": "/assets/quiz-kahoot/5-answers.png",
+            "image": "/assets/quiz-kahoot/5-answers.webp",
             "tile": 0,
             "correct": true,
             "color": "#f28aad"
           },
           {
             "text": "Роутер просто втомився",
-            "image": "/assets/quiz-kahoot/5-answers.png",
+            "image": "/assets/quiz-kahoot/5-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Злі духи домашнього інтернету",
-            "image": "/assets/quiz-kahoot/5-answers.png",
+            "image": "/assets/quiz-kahoot/5-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Сигнал соромиться туалету",
-            "image": "/assets/quiz-kahoot/5-answers.png",
+            "image": "/assets/quiz-kahoot/5-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -262,33 +262,33 @@
       {
         "text": "Як називається спосіб визначення опору резистора за кольоровими смужками?",
         "kicker": "ЕЛЕКТРОНІКА",
-        "image": "/assets/quiz-kahoot/6-question.png",
+        "image": "/assets/quiz-kahoot/6-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Кольорове кодування опорів",
-            "image": "/assets/quiz-kahoot/6-answers.png",
+            "image": "/assets/quiz-kahoot/6-answers.webp",
             "tile": 0,
             "correct": true,
             "color": "#f28aad"
           },
           {
             "text": "Таємний шифр масонів",
-            "image": "/assets/quiz-kahoot/6-answers.png",
+            "image": "/assets/quiz-kahoot/6-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Палітра для стін гуртожитку",
-            "image": "/assets/quiz-kahoot/6-answers.png",
+            "image": "/assets/quiz-kahoot/6-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Азбука Морзе",
-            "image": "/assets/quiz-kahoot/6-answers.png",
+            "image": "/assets/quiz-kahoot/6-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -298,33 +298,33 @@
       {
         "text": "Як технічно описати заклеювання вебкамери непрозорою ізолентою?",
         "kicker": "КІБЕРБЕЗПЕКА",
-        "image": "/assets/quiz-kahoot/7-question.png",
+        "image": "/assets/quiz-kahoot/7-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Кіберосліплення",
-            "image": "/assets/quiz-kahoot/7-answers.png",
+            "image": "/assets/quiz-kahoot/7-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Hardware Firewall v2.0",
-            "image": "/assets/quiz-kahoot/7-answers.png",
+            "image": "/assets/quiz-kahoot/7-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Декоративний дизайн",
-            "image": "/assets/quiz-kahoot/7-answers.png",
+            "image": "/assets/quiz-kahoot/7-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Фізичне блокування оптичного каналу",
-            "image": "/assets/quiz-kahoot/7-answers.png",
+            "image": "/assets/quiz-kahoot/7-answers.webp",
             "tile": 3,
             "correct": true,
             "color": "#b695ff"
@@ -334,33 +334,33 @@
       {
         "text": "Чому смартфон нагрівається під час важкої 3D-гри?",
         "kicker": "МОБІЛЬНІ ТЕХНОЛОГІЇ",
-        "image": "/assets/quiz-kahoot/8-question.png",
+        "image": "/assets/quiz-kahoot/8-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Нагрівається лише від рук",
-            "image": "/assets/quiz-kahoot/8-answers.png",
+            "image": "/assets/quiz-kahoot/8-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Увімкнено режим грілки",
-            "image": "/assets/quiz-kahoot/8-answers.png",
+            "image": "/assets/quiz-kahoot/8-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Тепловиділення в процесорі під час обчислень",
-            "image": "/assets/quiz-kahoot/8-answers.png",
+            "image": "/assets/quiz-kahoot/8-answers.webp",
             "tile": 2,
             "correct": true,
             "color": "#54dcb0"
           },
           {
             "text": "Процесор смажить яєчню",
-            "image": "/assets/quiz-kahoot/8-answers.png",
+            "image": "/assets/quiz-kahoot/8-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -370,33 +370,33 @@
       {
         "text": "Чому флешка на 64 GB показує приблизно 59,6 GiB у системі?",
         "kicker": "ДАНІ ТА НОСІЇ",
-        "image": "/assets/quiz-kahoot/9-question.png",
+        "image": "/assets/quiz-kahoot/9-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Приховані меми про викладачів",
-            "image": "/assets/quiz-kahoot/9-answers.png",
+            "image": "/assets/quiz-kahoot/9-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Флешка стиснулася від стресу",
-            "image": "/assets/quiz-kahoot/9-answers.png",
+            "image": "/assets/quiz-kahoot/9-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Гігабайти витекли через ковпачок",
-            "image": "/assets/quiz-kahoot/9-answers.png",
+            "image": "/assets/quiz-kahoot/9-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Різниця між десятковими GB і двійковими GiB",
-            "image": "/assets/quiz-kahoot/9-answers.png",
+            "image": "/assets/quiz-kahoot/9-answers.webp",
             "tile": 3,
             "correct": true,
             "color": "#b695ff"
@@ -406,33 +406,33 @@
       {
         "text": "Як розшифровується FM на радіоприймачі?",
         "kicker": "РАДІОЗВ’ЯЗОК",
-        "image": "/assets/quiz-kahoot/10-question.png",
+        "image": "/assets/quiz-kahoot/10-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Fast Music",
-            "image": "/assets/quiz-kahoot/10-answers.png",
+            "image": "/assets/quiz-kahoot/10-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Free Media",
-            "image": "/assets/quiz-kahoot/10-answers.png",
+            "image": "/assets/quiz-kahoot/10-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Frequency Modulation",
-            "image": "/assets/quiz-kahoot/10-answers.png",
+            "image": "/assets/quiz-kahoot/10-answers.webp",
             "tile": 2,
             "correct": true,
             "color": "#54dcb0"
           },
           {
             "text": "Full Maximum",
-            "image": "/assets/quiz-kahoot/10-answers.png",
+            "image": "/assets/quiz-kahoot/10-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -442,33 +442,33 @@
       {
         "text": "Що покращить голос під час стріму, якщо він шумний і нерівний?",
         "kicker": "СТРІМІНГ ТА АУДІО",
-        "image": "/assets/quiz-kahoot/11-question.png",
+        "image": "/assets/quiz-kahoot/11-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Вимкнути звук і показувати меми",
-            "image": "/assets/quiz-kahoot/11-answers.png",
+            "image": "/assets/quiz-kahoot/11-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Накрити мікрофон шкарпеткою",
-            "image": "/assets/quiz-kahoot/11-answers.png",
+            "image": "/assets/quiz-kahoot/11-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Говорити голосніше за кулер",
-            "image": "/assets/quiz-kahoot/11-answers.png",
+            "image": "/assets/quiz-kahoot/11-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "DSP, компресія та шумозаглушення",
-            "image": "/assets/quiz-kahoot/11-answers.png",
+            "image": "/assets/quiz-kahoot/11-answers.webp",
             "tile": 3,
             "correct": true,
             "color": "#b695ff"
@@ -478,33 +478,33 @@
       {
         "text": "Чому 4K-відео після завантаження в соцмережу може втратити якість?",
         "kicker": "ВІДЕО",
-        "image": "/assets/quiz-kahoot/12-question.png",
+        "image": "/assets/quiz-kahoot/12-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Алгоритм заздрить красі",
-            "image": "/assets/quiz-kahoot/12-answers.png",
+            "image": "/assets/quiz-kahoot/12-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Відеокомпресія та перекодування платформою",
-            "image": "/assets/quiz-kahoot/12-answers.png",
+            "image": "/assets/quiz-kahoot/12-answers.webp",
             "tile": 1,
             "correct": true,
             "color": "#ffc857"
           },
           {
             "text": "Об'єктив протерли піцою",
-            "image": "/assets/quiz-kahoot/12-answers.png",
+            "image": "/assets/quiz-kahoot/12-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Телефон перегрівся від крутості",
-            "image": "/assets/quiz-kahoot/12-answers.png",
+            "image": "/assets/quiz-kahoot/12-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -514,33 +514,33 @@
       {
         "text": "Для чого актори надягають костюми з маркерами для Motion Capture?",
         "kicker": "3D-ГРАФІКА",
-        "image": "/assets/quiz-kahoot/13-question.png",
+        "image": "/assets/quiz-kahoot/13-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Щоб актори не загубилися",
-            "image": "/assets/quiz-kahoot/13-answers.png",
+            "image": "/assets/quiz-kahoot/13-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Для меншого опору повітря",
-            "image": "/assets/quiz-kahoot/13-answers.png",
+            "image": "/assets/quiz-kahoot/13-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Новий тренд моди з Парижа",
-            "image": "/assets/quiz-kahoot/13-answers.png",
+            "image": "/assets/quiz-kahoot/13-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Для запису рухів і перенесення на 3D-персонажа",
-            "image": "/assets/quiz-kahoot/13-answers.png",
+            "image": "/assets/quiz-kahoot/13-answers.webp",
             "tile": 3,
             "correct": true,
             "color": "#b695ff"
@@ -550,33 +550,33 @@
       {
         "text": "Що дозволяє медіаінсталяції реагувати на голос або рух у реальному часі?",
         "kicker": "ІНТЕРАКТИВНІ МЕДІА",
-        "image": "/assets/quiz-kahoot/14-question.png",
+        "image": "/assets/quiz-kahoot/14-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Програмування на борщі",
-            "image": "/assets/quiz-kahoot/14-answers.png",
+            "image": "/assets/quiz-kahoot/14-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Креативне кодування й інтерактивні платформи",
-            "image": "/assets/quiz-kahoot/14-answers.png",
+            "image": "/assets/quiz-kahoot/14-answers.webp",
             "tile": 1,
             "correct": true,
             "color": "#ffc857"
           },
           {
             "text": "Перезапуск роутера",
-            "image": "/assets/quiz-kahoot/14-answers.png",
+            "image": "/assets/quiz-kahoot/14-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Малювання крейдою біля деканату",
-            "image": "/assets/quiz-kahoot/14-answers.png",
+            "image": "/assets/quiz-kahoot/14-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -586,33 +586,33 @@
       {
         "text": "Яка технічна проблема може спричинити нудоту під час використання VR?",
         "kicker": "ВІРТУАЛЬНА РЕАЛЬНІСТЬ",
-        "image": "/assets/quiz-kahoot/15-question.png",
+        "image": "/assets/quiz-kahoot/15-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Велика затримка або низький FPS",
-            "image": "/assets/quiz-kahoot/15-answers.png",
+            "image": "/assets/quiz-kahoot/15-answers.webp",
             "tile": 0,
             "correct": true,
             "color": "#f28aad"
           },
           {
             "text": "Шолом стискає думки",
-            "image": "/assets/quiz-kahoot/15-answers.png",
+            "image": "/assets/quiz-kahoot/15-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Монстри застосували біозброю",
-            "image": "/assets/quiz-kahoot/15-answers.png",
+            "image": "/assets/quiz-kahoot/15-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Згадав про ранкові пари",
-            "image": "/assets/quiz-kahoot/15-answers.png",
+            "image": "/assets/quiz-kahoot/15-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -622,33 +622,33 @@
       {
         "text": "Як у телетрансляції замінюють рекламу на бортах стадіону для різних країн?",
         "kicker": "ТЕЛЕБАЧЕННЯ ТА AR",
-        "image": "/assets/quiz-kahoot/16-question.png",
+        "image": "/assets/quiz-kahoot/16-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "ШІ читає думки глядача",
-            "image": "/assets/quiz-kahoot/16-answers.png",
+            "image": "/assets/quiz-kahoot/16-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Ніндзя переклеюють банери",
-            "image": "/assets/quiz-kahoot/16-answers.png",
+            "image": "/assets/quiz-kahoot/16-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Гравцям видають чарівні цукерки",
-            "image": "/assets/quiz-kahoot/16-answers.png",
+            "image": "/assets/quiz-kahoot/16-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Комп'ютерний зір та AR у відеопотоці",
-            "image": "/assets/quiz-kahoot/16-answers.png",
+            "image": "/assets/quiz-kahoot/16-answers.webp",
             "tile": 3,
             "correct": true,
             "color": "#b695ff"
@@ -658,33 +658,33 @@
       {
         "text": "Як створюють відчуття звуку позаду зліва в кінотеатрі?",
         "kicker": "ПРОСТОРОВЕ АУДІО",
-        "image": "/assets/quiz-kahoot/17-question.png",
+        "image": "/assets/quiz-kahoot/17-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Працівник шурхотить пакетом",
-            "image": "/assets/quiz-kahoot/17-answers.png",
+            "image": "/assets/quiz-kahoot/17-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Просторове аудіо з урахуванням психоакустики",
-            "image": "/assets/quiz-kahoot/17-answers.png",
+            "image": "/assets/quiz-kahoot/17-answers.webp",
             "tile": 1,
             "correct": true,
             "color": "#ffc857"
           },
           {
             "text": "Динаміки лоскочуть вухо",
-            "image": "/assets/quiz-kahoot/17-answers.png",
+            "image": "/assets/quiz-kahoot/17-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Відбиття від лисини сусіда",
-            "image": "/assets/quiz-kahoot/17-answers.png",
+            "image": "/assets/quiz-kahoot/17-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -694,33 +694,33 @@
       {
         "text": "Навіщо медіаінженеру Python або C++ для спецефектів?",
         "kicker": "ПРОГРАМУВАННЯ",
-        "image": "/assets/quiz-kahoot/18-question.png",
+        "image": "/assets/quiz-kahoot/18-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Писати гнівні коментарі",
-            "image": "/assets/quiz-kahoot/18-answers.png",
+            "image": "/assets/quiz-kahoot/18-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Плагіни, автоматизація рендеру та шейдери",
-            "image": "/assets/quiz-kahoot/18-answers.png",
+            "image": "/assets/quiz-kahoot/18-answers.webp",
             "tile": 1,
             "correct": true,
             "color": "#ffc857"
           },
           {
             "text": "Інакше комп'ютер згорить",
-            "image": "/assets/quiz-kahoot/18-answers.png",
+            "image": "/assets/quiz-kahoot/18-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Зламати систему оцінювання",
-            "image": "/assets/quiz-kahoot/18-answers.png",
+            "image": "/assets/quiz-kahoot/18-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -730,33 +730,33 @@
       {
         "text": "Що таке генеративне мистецтво (Generative Art)?",
         "kicker": "КРЕАТИВНЕ КОДУВАННЯ",
-        "image": "/assets/quiz-kahoot/19-question.png",
+        "image": "/assets/quiz-kahoot/19-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Картини виключно від роботів",
-            "image": "/assets/quiz-kahoot/19-answers.png",
+            "image": "/assets/quiz-kahoot/19-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Мистецтво через генетичний код",
-            "image": "/assets/quiz-kahoot/19-answers.png",
+            "image": "/assets/quiz-kahoot/19-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Кава випадково малює",
-            "image": "/assets/quiz-kahoot/19-answers.png",
+            "image": "/assets/quiz-kahoot/19-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Мистецтво на основі алгоритмів і коду",
-            "image": "/assets/quiz-kahoot/19-answers.png",
+            "image": "/assets/quiz-kahoot/19-answers.webp",
             "tile": 3,
             "correct": true,
             "color": "#b695ff"
@@ -766,33 +766,33 @@
       {
         "text": "Яка тварина в пошані на сторінці кафедри kotiki_mires?",
         "kicker": "КАФЕДРА",
-        "image": "/assets/quiz-kahoot/20-question.png",
+        "image": "/assets/quiz-kahoot/20-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Собаки",
-            "image": "/assets/quiz-kahoot/20-answers.png",
+            "image": "/assets/quiz-kahoot/20-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Коти",
-            "image": "/assets/quiz-kahoot/20-answers.png",
+            "image": "/assets/quiz-kahoot/20-answers.webp",
             "tile": 1,
             "correct": true,
             "color": "#ffc857"
           },
           {
             "text": "Лисиці",
-            "image": "/assets/quiz-kahoot/20-answers.png",
+            "image": "/assets/quiz-kahoot/20-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Пінгвіни",
-            "image": "/assets/quiz-kahoot/20-answers.png",
+            "image": "/assets/quiz-kahoot/20-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -802,33 +802,33 @@
       {
         "text": "Який датчик визначає нахил смартфона відносно сили тяжіння?",
         "kicker": "ДАТЧИКИ",
-        "image": "/assets/quiz-kahoot/21-question.png",
+        "image": "/assets/quiz-kahoot/21-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Акселерометр",
-            "image": "/assets/quiz-kahoot/21-answers.png",
+            "image": "/assets/quiz-kahoot/21-answers.webp",
             "tile": 0,
             "correct": true,
             "color": "#f28aad"
           },
           {
             "text": "Датчик температури",
-            "image": "/assets/quiz-kahoot/21-answers.png",
+            "image": "/assets/quiz-kahoot/21-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Магнітометр",
-            "image": "/assets/quiz-kahoot/21-answers.png",
+            "image": "/assets/quiz-kahoot/21-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Фронтальна камера",
-            "image": "/assets/quiz-kahoot/21-answers.png",
+            "image": "/assets/quiz-kahoot/21-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -838,33 +838,33 @@
       {
         "text": "Який фільтр пропустить низький тон і послабить високочастотне шипіння?",
         "kicker": "ОБРОБКА СИГНАЛІВ",
-        "image": "/assets/quiz-kahoot/22-question.png",
+        "image": "/assets/quiz-kahoot/22-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Антивірус",
-            "image": "/assets/quiz-kahoot/22-answers.png",
+            "image": "/assets/quiz-kahoot/22-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Фільтр низьких частот",
-            "image": "/assets/quiz-kahoot/22-answers.png",
+            "image": "/assets/quiz-kahoot/22-answers.webp",
             "tile": 1,
             "correct": true,
             "color": "#ffc857"
           },
           {
             "text": "Режим «не турбувати»",
-            "image": "/assets/quiz-kahoot/22-answers.png",
+            "image": "/assets/quiz-kahoot/22-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Фільтр високих частот",
-            "image": "/assets/quiz-kahoot/22-answers.png",
+            "image": "/assets/quiz-kahoot/22-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -874,33 +874,33 @@
       {
         "text": "Припій з'єднав дві ізольовані доріжки плати. Яка це несправність?",
         "kicker": "МОНТАЖ ЕЛЕКТРОНІКИ",
-        "image": "/assets/quiz-kahoot/23-question.png",
+        "image": "/assets/quiz-kahoot/23-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Коротке замикання",
-            "image": "/assets/quiz-kahoot/23-answers.png",
+            "image": "/assets/quiz-kahoot/23-answers.webp",
             "tile": 0,
             "correct": true,
             "color": "#f28aad"
           },
           {
             "text": "Подвоєння швидкості інтернету",
-            "image": "/assets/quiz-kahoot/23-answers.png",
+            "image": "/assets/quiz-kahoot/23-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Обрив кола",
-            "image": "/assets/quiz-kahoot/23-answers.png",
+            "image": "/assets/quiz-kahoot/23-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Безкоштовне оновлення схеми",
-            "image": "/assets/quiz-kahoot/23-answers.png",
+            "image": "/assets/quiz-kahoot/23-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -910,33 +910,33 @@
       {
         "text": "У скільки разів 100 нм менше за 1 мкм?",
         "kicker": "МІКРО- ТА НАНОРОЗМІРИ",
-        "image": "/assets/quiz-kahoot/24-question.png",
+        "image": "/assets/quiz-kahoot/24-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "На один піксель",
-            "image": "/assets/quiz-kahoot/24-answers.png",
+            "image": "/assets/quiz-kahoot/24-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "У 100 разів",
-            "image": "/assets/quiz-kahoot/24-answers.png",
+            "image": "/assets/quiz-kahoot/24-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "У 10 разів",
-            "image": "/assets/quiz-kahoot/24-answers.png",
+            "image": "/assets/quiz-kahoot/24-answers.webp",
             "tile": 2,
             "correct": true,
             "color": "#54dcb0"
           },
           {
             "text": "У 1024 рази",
-            "image": "/assets/quiz-kahoot/24-answers.png",
+            "image": "/assets/quiz-kahoot/24-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -946,33 +946,33 @@
       {
         "text": "Що захищає чутливу мікросхему від електростатичного розряду?",
         "kicker": "ЗАХИСТ ЕЛЕКТРОНІКИ",
-        "image": "/assets/quiz-kahoot/25-question.png",
+        "image": "/assets/quiz-kahoot/25-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Табличка «Не іскрити!»",
-            "image": "/assets/quiz-kahoot/25-answers.png",
+            "image": "/assets/quiz-kahoot/25-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Синтетичний плед",
-            "image": "/assets/quiz-kahoot/25-answers.png",
+            "image": "/assets/quiz-kahoot/25-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Заземлені антистатичні браслет і килимок",
-            "image": "/assets/quiz-kahoot/25-answers.png",
+            "image": "/assets/quiz-kahoot/25-answers.webp",
             "tile": 2,
             "correct": true,
             "color": "#54dcb0"
           },
           {
             "text": "Резервна копія заряду",
-            "image": "/assets/quiz-kahoot/25-answers.png",
+            "image": "/assets/quiz-kahoot/25-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -982,33 +982,33 @@
       {
         "text": "Який компонент має контакти у скляній колбі й реагує на магнітне поле?",
         "kicker": "ЕЛЕКТРОННІ КОМПОНЕНТИ",
-        "image": "/assets/quiz-kahoot/26-question.png",
+        "image": "/assets/quiz-kahoot/26-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Геркон",
-            "image": "/assets/quiz-kahoot/26-answers.png",
+            "image": "/assets/quiz-kahoot/26-answers.webp",
             "tile": 0,
             "correct": true,
             "color": "#f28aad"
           },
           {
             "text": "Світлодіод",
-            "image": "/assets/quiz-kahoot/26-answers.png",
+            "image": "/assets/quiz-kahoot/26-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Магнітний підписник дверей",
-            "image": "/assets/quiz-kahoot/26-answers.png",
+            "image": "/assets/quiz-kahoot/26-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Кварцовий резонатор",
-            "image": "/assets/quiz-kahoot/26-answers.png",
+            "image": "/assets/quiz-kahoot/26-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -1018,33 +1018,33 @@
       {
         "text": "Навіщо під час виготовлення мікросхем потрібне надчисте середовище?",
         "kicker": "ВИРОБНИЦТВО ЧИПІВ",
-        "image": "/assets/quiz-kahoot/27-question.png",
+        "image": "/assets/quiz-kahoot/27-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Частинки пилу спричиняють дефекти мікроструктур",
-            "image": "/assets/quiz-kahoot/27-answers.png",
+            "image": "/assets/quiz-kahoot/27-answers.webp",
             "tile": 0,
             "correct": true,
             "color": "#f28aad"
           },
           {
             "text": "Щоб чип гарно виглядав",
-            "image": "/assets/quiz-kahoot/27-answers.png",
+            "image": "/assets/quiz-kahoot/27-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Щоб процесор не чхав",
-            "image": "/assets/quiz-kahoot/27-answers.png",
+            "image": "/assets/quiz-kahoot/27-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Щоб пил не забрав гігабайти",
-            "image": "/assets/quiz-kahoot/27-answers.png",
+            "image": "/assets/quiz-kahoot/27-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -1054,33 +1054,33 @@
       {
         "text": "Який елемент безпосередньо перетворює світло на електричну енергію?",
         "kicker": "ФОТОЕЛЕКТРОНІКА",
-        "image": "/assets/quiz-kahoot/28-question.png",
+        "image": "/assets/quiz-kahoot/28-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Фотоелектричний елемент",
-            "image": "/assets/quiz-kahoot/28-answers.png",
+            "image": "/assets/quiz-kahoot/28-answers.webp",
             "tile": 0,
             "correct": true,
             "color": "#f28aad"
           },
           {
             "text": "Звичайний конденсатор",
-            "image": "/assets/quiz-kahoot/28-answers.png",
+            "image": "/assets/quiz-kahoot/28-answers.webp",
             "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Акумулятор у сонцезахисних окулярах",
-            "image": "/assets/quiz-kahoot/28-answers.png",
+            "image": "/assets/quiz-kahoot/28-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Кабель із сонячною підпискою",
-            "image": "/assets/quiz-kahoot/28-answers.png",
+            "image": "/assets/quiz-kahoot/28-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
@@ -1090,33 +1090,33 @@
       {
         "text": "Як пов'язані розробка мікросхеми датчика і пристрою з цим датчиком?",
         "kicker": "СИСТЕМНА ІНЖЕНЕРІЯ",
-        "image": "/assets/quiz-kahoot/29-question.png",
+        "image": "/assets/quiz-kahoot/29-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "Усе вирішує дизайн коробки",
-            "image": "/assets/quiz-kahoot/29-answers.png",
+            "image": "/assets/quiz-kahoot/29-answers.webp",
             "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "Компоненти й система мають працювати узгоджено",
-            "image": "/assets/quiz-kahoot/29-answers.png",
+            "image": "/assets/quiz-kahoot/29-answers.webp",
             "tile": 1,
             "correct": true,
             "color": "#ffc857"
           },
           {
             "text": "Пристрій працює без компонентів",
-            "image": "/assets/quiz-kahoot/29-answers.png",
+            "image": "/assets/quiz-kahoot/29-answers.webp",
             "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Ніяк: вони з різних інтернетів",
-            "image": "/assets/quiz-kahoot/29-answers.png",
+            "image": "/assets/quiz-kahoot/29-answers.webp",
             "tile": 3,
             "correct": false,
             "color": "#b695ff"
