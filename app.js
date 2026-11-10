@@ -122,6 +122,20 @@ app.addEventListener('click', event => {
   action.catch(() => toast('Повноекранний режим недоступний'));
 });
 
+window.addEventListener('keydown', event => {
+  if (event.key !== ' ' || event.defaultPrevented || event.isComposing ||
+      event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+  if (!hostSession || location.hash !== '#/host/' + hostSession.pin) return;
+  const target = event.target;
+  if (target.isContentEditable || target.closest?.('input, textarea, select, button, a, [role="button"]')) return;
+  if ($('.password-modal')) return;
+
+  const action = $('.host-stage #openAnswers, .host-stage #next');
+  if (!action || action.disabled) return;
+  event.preventDefault();
+  if (!event.repeat) action.click();
+});
+
 function clockBadge(state) {
   if (state.status === 'result') return `<span class="tag">${state.allAnswered ? 'Усі відповіли' : 'Час вийшов'}</span>`;
   if (state.status === 'reading' && state.remainingMs === null) return '<span class="tag round-clock">Ведучий читає запитання</span>';
@@ -186,7 +200,7 @@ function renderHostRound(s) {
     <span class="tag">${s.questionIndex + 1}/${s.total}</span>${clockBadge(s)}${fullscreenButton()}</div></header>
     <div class="stage-question"><h1>${html(s.question.text)}</h1>${questionArt(s.question)}</div>
     ${s.status === 'reading' ? '' : `<div class="live-answers">${roundCards(s, false)}</div>`}
-    <footer class="stage-footer">${s.status === 'reading' ? '<button class="btn mint" id="openAnswers">Відкрити відповіді →</button>' : s.status === 'result' ? `<button class="btn accent" id="next">${s.questionIndex + 1 === s.total ? 'Результати' : 'Наступне запитання'} →</button>` : ''}</footer>
+    <footer class="stage-footer">${s.status === 'reading' ? '<button class="btn mint" id="openAnswers" aria-keyshortcuts="Space" title="Пробіл">Відкрити відповіді →</button>' : s.status === 'result' ? `<button class="btn accent" id="next" aria-keyshortcuts="Space" title="Пробіл">${s.questionIndex + 1 === s.total ? 'Результати' : 'Наступне запитання'} →</button>` : ''}</footer>
   </section></div>`;
   const next = $('#next');
   if (next) next.onclick = nextQuestion;
