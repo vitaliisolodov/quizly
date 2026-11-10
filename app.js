@@ -11,25 +11,25 @@ function html(value) {
   return String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[char]);
 }
 function asset(path) { return String(path || '').replace(/^\/+/, ''); }
-function nav() { return `<nav class="nav"><a class="brand" href="#/">${icon} Quizly P2P</a><div class="nav-actions"><a class="btn secondary" href="#/join">Приєднатися</a><a class="btn accent" href="#/dashboard">Провести гру</a></div></nav>`; }
+function nav() { return `<nav class="nav"><a class="brand" href="#/">${icon} Quizly</a><div class="nav-actions"><button class="btn secondary" onclick="location.hash='#/join'">Приєднатися</button><button class="btn accent" onclick="location.hash='#/dashboard'">Провести гру</button></div></nav>`; }
 function toast(message) { const e=document.createElement('div');e.className='toast';e.textContent=message;document.body.append(e);setTimeout(()=>e.remove(),3200); }
 function questionArt(question) { return question?.image ? `<img class="question-art" src="${html(asset(question.image))}" alt="">` : ''; }
-function answerCard(answer, label, className, index, disabled=false, correct=false) {
+function answerCard(answer, label, className, index) {
   const tag=index===undefined?'div':'button';
-  const action=index===undefined?'':` type="button" data-answer="${index}"${disabled?' disabled':''}`;
-  if(!answer?.image||!Number.isInteger(answer.tile))return `<${tag} class="${className} illustrated-answer plain-answer${correct?' correct-answer':''}"${action} style="background-color:${html(answer?.color||colors[index]||colors[0])}"><span class="answer-caption">${html(label)}</span></${tag}>`;
+  const action=index===undefined?'':` type="button" data-answer="${index}"`;
+  if(!answer.image||!Number.isInteger(answer.tile))return `<${tag} class="${className}"${action} style="background:${html(answer.color||colors[index]||colors[0])}"><span>${html(label)}</span></${tag}>`;
   const position=`${(answer.tile%2)*100}% ${Math.floor(answer.tile/2)*100}%`;
-  return `<${tag} class="${className} illustrated-answer${correct?' correct-answer':''}"${action} style="background-color:${html(answer.color||colors[index]||colors[0])}"><span class="answer-art" aria-hidden="true" style="background-image:url('${html(asset(answer.image))}');background-position:${position}"></span><span class="answer-caption">${html(label)}</span></${tag}>`;
+  return `<${tag} class="${className} illustrated-answer"${action} style="background-color:${html(answer.color||colors[index]||colors[0])}"><span class="answer-art" aria-hidden="true" style="background-image:url('${html(asset(answer.image))}');background-position:${position}"></span><span class="answer-caption">${html(label)}</span></${tag}>`;
 }
 async function loadQuizzes() { const r=await fetch('./data/quizzes.json',{cache:'no-store'});if(!r.ok)throw new Error('Не вдалося завантажити data/quizzes.json');quizzes=await r.json(); }
 
-function home() {
-  app.innerHTML=`<div class="shell">${nav()}<main><section class="hero"><div><span class="eyebrow"><i class="pulse"></i> СТАТИЧНА P2P-ВЕРСІЯ</span><h1>Грай. Дивуй.<br><span class="grad">Зберігай приватно.</span></h1><p>Гра працює на GitHub Pages, а браузер ведучого керує сесією. Контакти шифруються та залишаються тільки на пристрої ведучого.</p><div class="hero-actions"><a class="btn accent" href="#/dashboard">Провести вікторину →</a><a class="btn secondary" href="#/join">Ввести PIN</a></div><div class="stats"><div><b>P2P</b><small>гра між браузерами</small></div><div><b>AES</b><small>зашифрований архів</small></div><div><b>0</b><small>контактів на сервері</small></div></div></div><div class="mockup"><div class="host-card"><div class="windowbar"><i></i><i></i><i></i></div><div class="question-preview">Хто зберігає контакти учасників?</div><div class="answer-grid"><div class="answer-tile">GitHub Pages</div><div class="answer-tile">PeerJS Cloud</div><div class="answer-tile">Браузер ведучого</div><div class="answer-tile">Публічний CSV</div></div></div><div class="phone"><div class="notch"></div><h4>Приватний канал</h4><div class="mini" style="background:#f28aad">QR та PIN</div><div class="mini" style="background:#ffc857">WebRTC</div><div class="mini" style="background:#54dcb0">Тільки ведучий</div><div class="mini" style="background:#b695ff">Зашифровано</div></div></div></section></main></div>`;
-}
+function home(){app.innerHTML=`<div class="shell">${nav()}<main><section class="hero"><div><span class="eyebrow"><i class="pulse"></i> ЖИВІ ВІКТОРИНИ НОВОГО ФОРМАТУ</span><h1>Грай. Дивуй.<br><span class="grad">Запам’ятовуй.</span></h1><p>Проводьте інтерактивні вікторини, де кожна відповідь має власний дизайн, текст та зображення — і все це гравці бачать прямо на своїх телефонах.</p><div class="hero-actions"><button class="btn accent" onclick="location.hash='#/dashboard'">Провести вікторину →</button><button class="btn secondary" onclick="location.hash='#/join'">Ввести PIN</button></div><div class="stats"><div><b>∞</b><small>свободи дизайну</small></div><div><b>QR</b><small>швидке приєднання</small></div><div><b>100%</b><small>ваші контакти</small></div></div></div><div class="mockup"><div class="host-card"><div class="windowbar"><i></i><i></i><i></i></div><div class="question-preview">Яка технологія врятує твій стрім від шуму?</div><div class="answer-grid"><div class="answer-tile">Шкарпетка на мікрофон</div><div class="answer-tile">Говорити голосніше</div><div class="answer-tile">DSP і шумозаглушення</div><div class="answer-tile">Показувати меми</div></div></div><div class="phone"><div class="notch"></div><h4>Обери відповідь</h4><div class="mini" style="background:#f28aad">Шкарпетка</div><div class="mini" style="background:#ffc857">Говорити голосніше</div><div class="mini" style="background:#54dcb0">DSP</div><div class="mini" style="background:#b695ff">Меми</div></div></div></section><section class="section"><div class="section-head"><span class="tag">БІЛЬШЕ, НІЖ ТЕСТ</span><h2>Усе, чого бракує звичайним вікторинам</h2></div><div class="features"><article class="feature"><span class="icon">🎨</span><h3>Ілюстровані відповіді</h3><p>Колір, текст і власне зображення для кожного варіанта — без шаблонних символів.</p></article><article class="feature"><span class="icon">📱</span><h3>Повний контент на телефоні</h3><p>Гравець бачить запитання й усі картки відповідей так само повно, як ведучий.</p></article><article class="feature"><span class="icon">✦</span><h3>Контакти, а не нікнейми</h3><p>Збирайте email або телефон із валідацією та фільтром некоректних імен.</p></article></div></section></main></div>`}
 function dashboard() {
-  app.innerHTML=`<div class="dash"><aside class="sidebar"><a class="brand" href="#/">${icon} Quizly</a><a class="side-link active">▦ Вікторини</a><a class="side-link" href="#/join">↗ Приєднатися</a><a class="side-link" href="#/">⌂ Головна</a></aside><main class="main"><div class="topline"><div><div class="tag">БРАУЗЕР ВЕДУЧОГО</div><h1>Запуск гри</h1></div><button class="btn secondary" id="exportArchive">Завантажити приватний архів CSV</button></div><div class="privacy-card"><b>Контакти не завантажуються на GitHub.</b><span>Вони зашифровані паролем у цьому браузері. Пароль неможливо відновити.</span></div><div class="quiz-list">${quizzes.map(q=>`<article class="quiz-card"><div class="quiz-art">✦</div><div class="quiz-body"><h3>${html(q.title)}</h3><div class="quiz-meta">${q.questions.length} запитань • P2P-режим</div><div class="quiz-actions"><button class="btn mint" data-host="${html(q.id)}">Запустити</button></div></div></article>`).join('')}</div><section class="panel static-note"><h3>Що важливо</h3><p>Не закривайте вкладку ведучого до завершення гри. Для підключення потрібен інтернет, але контакти не записуються на зовнішній сервер.</p></section></main></div>`;
-  document.querySelectorAll('[data-host]').forEach(b=>b.onclick=()=>beginHost(quizzes.find(q=>q.id===b.dataset.host)));
-  $('#exportArchive').onclick=()=>askArchivePassword('export');
+  app.innerHTML=`<div class="dash"><aside class="sidebar"><a class="brand" href="#/">${icon} Quizly</a><a class="side-link active">▦ Мої вікторини</a><a class="side-link" href="#/join">↗ Приєднатися</a><a class="side-link" href="#/">⌂ На головну</a></aside><main class="main"><div class="topline"><div><div class="tag">КАБІНЕТ ВЕДУЧОГО</div><h1>Мої вікторини</h1></div></div><p><button class="btn secondary" id="exportArchive">Завантажити приватний архів CSV</button></p><div class="quiz-list">${quizzes.map(q=>`<article class="quiz-card"><div class="quiz-art">${q.id==='demo'?'⚡':'✦'}</div><div class="quiz-body"><h3>${html(q.title)}</h3><div class="quiz-meta">${q.questions.length} запитань • готова до запуску</div><div class="quiz-actions"><button class="btn mint" data-host="${html(q.id)}">Запустити</button></div></div></article>`).join('')}</div></main></div>`;
+  document.querySelectorAll('[data-host]').forEach(button => {
+    button.onclick = () => beginHost(quizzes.find(quiz => quiz.id === button.dataset.host));
+  });
+  $('#exportArchive').onclick = () => askArchivePassword('export');
 }
 function beginHost(quiz) { askArchivePassword('start',quiz); }
 function askArchivePassword(mode,quiz){
@@ -81,7 +81,7 @@ function broadcast(){if(!hostSession)return;for(const [id,c] of hostSession.conn
 function startGame(){if(!hostSession.players.length)return toast('Дочекайтеся хоча б одного гравця');hostSession.questionIndex=-1;nextQuestion();}
 function nextQuestion(){
   clearTimeout(hostSession.timer);
-  if(hostSession.questionIndex+1>=hostSession.quiz.questions.length){hostSession.status='final';hostSession.deadline=0;broadcast();launchConfetti();return;}
+  if(hostSession.questionIndex+1>=hostSession.quiz.questions.length){hostSession.status='final';hostSession.deadline=0;broadcast();return;}
   hostSession.questionIndex+=1;hostSession.status='reading';hostSession.answers.clear();hostSession.allAnswered=false;hostSession.players.forEach(p=>p.roundPoints=0);
   const q=hostSession.quiz.questions[hostSession.questionIndex],seconds=Math.max(0,Math.min(60,Number(q.readTime)||0));hostSession.deadline=seconds?Date.now()+seconds*1000:0;
   if(seconds)hostSession.timer=setTimeout(openAnswers,seconds*1000);broadcast();
@@ -95,66 +95,269 @@ async function revealQuestion(allAnswered){
   for(const p of hostSession.players){const a=hostSession.answers.get(p.id),correct=a&&q.answers[a.answerIndex]?.correct;p.roundPoints=correct?500+Math.floor(500*Math.max(0,hostSession.deadline-a.answeredAt)/duration):0;p.score+=p.roundPoints;}
   hostSession.status='result';hostSession.allAnswered=allAnswered;hostSession.deadline=0;await Promise.all(hostSession.players.map(savePlayerRecord));broadcast();
 }
-function renderHost(){
-  if(!hostSession||!location.hash.startsWith('#/host/'))return;clearInterval(clockTimer);const s=hostSession,qz=s.quiz;
+function fullscreenButton() {
+  return document.fullscreenEnabled
+    ? '<button type="button" class="btn secondary fullscreen-toggle" aria-label="Повноекранний режим" title="Повноекранний режим">⛶</button>'
+    : '';
+}
+
+app.addEventListener('click', event => {
+  if (!event.target.closest('.fullscreen-toggle')) return;
+  const action = document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+  action.catch(() => toast('Повноекранний режим недоступний'));
+});
+
+function clockBadge(state) {
+  if (state.status === 'result') return `<span class="tag">${state.allAnswered ? 'Усі відповіли' : 'Час вийшов'}</span>`;
+  if (state.status === 'reading' && state.remainingMs === null) return '<span class="tag round-clock">Ведучий читає запитання</span>';
+  return `<span class="tag round-clock">${state.status === 'reading' ? 'Читання' : 'Час на відповідь'} <b id="secondsLeft">${Math.ceil(state.remainingMs / 1000)}</b> с</span>`;
+}
+
+function startClock(remainingMs) {
+  clearInterval(clockTimer);
+  const timer = $('#secondsLeft');
+  if (!timer || remainingMs == null) return;
+  const deadline = performance.now() + remainingMs;
+  const tick = () => {
+    const seconds = Math.max(0, Math.ceil((deadline - performance.now()) / 1000));
+    timer.textContent = seconds;
+    if (seconds === 0) {
+      clearInterval(clockTimer);
+      document.querySelectorAll('[data-answer]').forEach(button => { button.disabled = true; });
+    }
+  };
+  clockTimer = setInterval(tick, 150);
+  tick();
+}
+
+function roundCards(state, playerMode) {
+  return state.question.answers.map((answer, index) => {
+    const correct = state.status === 'result' && answer.correct;
+    const label = `${playerMode ? '' : (index + 1) + '. '}${correct ? '✓ ' : ''}${answer.text}`;
+    const style = playerMode ? 'player-answer' : 'live-answer';
+    return answerCard(answer, label, style + (correct ? ' correct-card' : ''), playerMode ? index : undefined);
+  }).join('');
+}
+
+function renderHost() {
+  if (!hostSession || location.hash !== '#/host/' + hostSession.pin) return;
+  const s = hostSession;
+  const qz = s.quiz;
   if(s.status==='lobby'){
     const joinUrl=new URL(location.href);joinUrl.hash='#/join/'+s.pin;
-    app.innerHTML=`<div class="host"><header class="host-head"><div class="brand">${icon} Quizly P2P</div><div><span class="tag">PIN</span> <span class="pin">${s.pin}</span></div></header><main class="lobby"><div class="qr-card"><div id="qr"></div><b>Скануйте QR або введіть PIN</b><small>${html(joinUrl.href)}</small></div><section><span class="tag">ЛОБІ</span><h1>${html(qz.title)}</h1><h2>${s.players.length} гравців</h2><div class="players">${s.players.map(p=>`<span class="chip">${html(p.name)}</span>`).join('')||'<p>Очікую на учасників…</p>'}</div><button class="btn accent" id="startGame">Почати гру</button></section></main></div>`;
+    app.innerHTML=`<div class="host"><header class="host-head"><a class="brand" href="#/dashboard">${icon} Quizly</a><div class="round-controls">PIN <span class="pin">${s.pin}</span>${fullscreenButton()}</div></header><main class="lobby"><div class="qr-card"><div id="qr"></div><b>Скануйте QR або введіть PIN</b><small>${html(joinUrl.href)}</small></div><section><span class="tag">ЛОБІ • ${s.players.length} УЧАСНИКІВ</span><h1 style="font:700 42px Unbounded">${html(qz.title)}</h1><div class="players">${s.players.map(p=>`<span class="chip">${html(p.name)}</span>`).join('')||'<p>Очікую на учасників…</p>'}</div><button class="btn accent" id="startGame" style="margin-top:28px" ${s.players.length ? '' : 'disabled'}>Почати гру →</button></section></main></div>`;
     new QRCode($('#qr'),{text:joinUrl.href,width:280,height:280,colorDark:'#11102c',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});$('#startGame').onclick=startGame;return;
   }
-  if(s.status==='final')return renderFinal(publicState(),true);
-  const q=qz.questions[s.questionIndex],count=`${s.questionIndex+1} / ${qz.questions.length}`;
-  if(s.status==='reading'){
-    app.innerHTML=`<div class="host host-screen reading-screen"><header class="host-head"><div class="brand">${icon} Quizly</div><div class="round-controls"><span class="tag">${count}</span>${s.deadline?'<span class="timer" data-clock></span>':'<span class="tag">ЧИТАННЯ</span>'}<button class="btn secondary fullscreen-toggle">⛶</button></div></header><main class="stage-question"><h1>${html(q.text)}</h1>${questionArt(q)}</main><footer class="stage-footer"><button class="btn accent" id="openAnswers">Показати відповіді →</button></footer></div>`;
-    $('#openAnswers').onclick=openAnswers;$('.fullscreen-toggle').onclick=toggleFullscreen;startClock();return;
-  }
-  if(s.status==='question'){
-    app.innerHTML=`<div class="host host-screen"><header class="host-head"><div class="brand">${icon} Quizly</div><div class="round-controls"><span class="tag">${count}</span><span class="tag">${s.answers.size}/${activePlayers().length} відповіли</span><span class="timer" data-clock></span><button class="btn secondary fullscreen-toggle">⛶</button></div></header><main class="live-q"><h1 class="live-title">${html(q.text)}</h1>${questionArt(q)}<div class="live-answers">${q.answers.map(a=>answerCard(a,a.text,'live-answer')).join('')}</div></main></div>`;
-    $('.fullscreen-toggle').onclick=toggleFullscreen;startClock();return;
-  }
-  const sorted=[...s.players].sort((a,b)=>b.score-a.score);
-  app.innerHTML=`<div class="host host-screen"><header class="host-head"><div class="brand">${icon} Quizly</div><span class="tag">${s.allAnswered?'УСІ ВІДПОВІЛИ':'ЧАС ВИЙШОВ'}</span></header><main class="live-q"><h1 class="live-title">${html(q.text)}</h1><div class="live-answers">${q.answers.map(a=>answerCard(a,a.text,'live-answer',undefined,false,a.correct)).join('')}</div><div class="leaderboard compact-board">${sorted.slice(0,5).map((p,i)=>`<div class="rank"><b>${i+1}</b><span>${html(p.name)}</span><b>${p.score}</b></div>`).join('')}</div></main><footer class="stage-footer"><button class="btn accent" id="nextQuestion">${s.questionIndex+1===qz.questions.length?'Показати фінал':'Наступне запитання'} →</button></footer></div>`;
-  $('#nextQuestion').onclick=nextQuestion;
+  if (s.status === 'final') return renderResults(publicState(), true);
+  const state = {
+    ...s,
+    question: qz.questions[s.questionIndex],
+    total: qz.questions.length,
+    remainingMs: remainingTime(s.deadline)
+  };
+  renderHostRound(state);
 }
-function toggleFullscreen(){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen?.();}
-function startClock(){clearInterval(clockTimer);const update=()=>{const e=$('[data-clock]');if(e&&hostSession?.deadline)e.textContent=Math.max(0,Math.ceil((hostSession.deadline-Date.now())/1000));};update();clockTimer=setInterval(update,200);}
 
-function joinPage(prefill=''){
-  const saved=JSON.parse(localStorage.getItem('quizly-player-details')||'{}');
-  app.innerHTML=`<div class="join"><form class="join-card" id="joinForm"><a class="brand" href="#/">${icon} Quizly</a><h1>Приєднатися</h1><label>PIN гри</label><input class="input" id="pin" inputmode="numeric" maxlength="6" required value="${html(prefill)}"><label>Ваше ім’я</label><input class="input" id="name" maxlength="28" autocomplete="name" required value="${html(saved.name||'')}"><label>Email або номер телефону</label><input class="input" id="contact" maxlength="80" required value="${html(saved.contact||'')}"><fieldset class="interest-field"><legend>Чим ви цікавитесь?</legend><div class="interest-grid">${[...defaultInterests,noInterest].map(o=>`<label class="interest-option"><input type="checkbox" name="interest" value="${html(o)}" ${(saved.interests||[]).includes(o)?'checked':''}><span>${html(o)}</span></label>`).join('')}</div></fieldset><p class="join-error" role="alert"></p><button class="btn accent" id="joinButton">Приєднатися →</button><small class="privacy-copy">Контакт передається через захищений P2P-канал і зберігається лише в зашифрованому архіві ведучого.</small></form></div>`;
-  document.querySelectorAll('input[name="interest"]').forEach(input=>input.onchange=()=>{const inputs=[...document.querySelectorAll('input[name="interest"]')];if(input.value===noInterest&&input.checked)inputs.filter(x=>x!==input).forEach(x=>x.checked=false);if(input.value!==noInterest&&input.checked)inputs.find(x=>x.value===noInterest).checked=false;});
-  $('#joinForm').onsubmit=event=>{event.preventDefault();const pin=$('#pin').value.trim(),name=validateName($('#name').value),contact=validateContact($('#contact').value),interests=[...document.querySelectorAll('input[name="interest"]:checked')].map(x=>x.value);if(!/^\d{6}$/.test(pin))return formError('Введіть шестизначний PIN гри','pin');if(!name)return formError('Введіть ім’я з літер, без цифр і нецензурних слів','name');if(!contact)return formError('Вкажіть коректний email або телефон','contact');if(!interests.length)return formError('Оберіть хоча б один інтерес');localStorage.setItem('quizly-player-details',JSON.stringify({name,contact,interests}));connectPlayer(pin,{name,contact,interests});};
+function remainingTime(deadline) {
+  return deadline ? Math.max(0, deadline - Date.now()) : null;
 }
-function formError(message,field){$('.join-error').textContent=message;if(field)$('#'+field)?.focus();}
+
+function renderHostRound(s) {
+  const count = `${s.answers.size}/${activePlayers().length} відповіли`;
+  const key = `${s.id}:${s.questionIndex}:${s.status}`;
+  if ($('.host-screen')?.dataset.view === key) {
+    $('#responseCount').textContent = count;
+    return;
+  }
+  app.innerHTML = `<div class="host-stage"><section data-view="${key}" class="host-screen${s.status === 'reading' ? ' reading-screen' : ''}">
+    <header class="host-head"><span class="brand">${icon} Quizly</span><div class="round-controls"><span id="responseCount">${count}</span>
+    <span class="tag">${s.questionIndex + 1}/${s.total}</span>${clockBadge(s)}${fullscreenButton()}</div></header>
+    <div class="stage-question"><h1>${html(s.question.text)}</h1>${questionArt(s.question)}</div>
+    ${s.status === 'reading' ? '' : `<div class="live-answers">${roundCards(s, false)}</div>`}
+    <footer class="stage-footer">${s.status === 'reading' ? '<button class="btn mint" id="openAnswers">Відкрити відповіді →</button>' : s.status === 'result' ? `<button class="btn accent" id="next">${s.questionIndex + 1 === s.total ? 'Результати' : 'Наступне запитання'} →</button>` : ''}</footer>
+  </section></div>`;
+  const next = $('#next');
+  if (next) next.onclick = nextQuestion;
+  const openButton = $('#openAnswers');
+  if (openButton) openButton.onclick = openAnswers;
+  startClock(s.remainingMs);
+}
+
+function joinPage(prefill = '', details) {
+  details ??= JSON.parse(localStorage.getItem('quizly-player-details') || '{}');
+  app.innerHTML = `<div class="join"><form class="join-card" id="registerForm">
+    <a class="brand" href="#/">${icon} Quizly</a><h1>Приєднатися до гри</h1>
+    <label for="pin">PIN гри</label>
+    <input class="input" id="pin" inputmode="numeric" maxlength="6" required value="${/^\d{6}$/.test(prefill) ? prefill : ''}">
+    <label for="name">Ваше ім’я</label>
+    <input class="input" id="name" autocomplete="name" maxlength="28" required value="${html(details.name ?? '')}">
+    <label for="contact">Email або номер телефону</label>
+    <input class="input" id="contact" maxlength="80" required value="${html(details.contact ?? '')}">
+    <p class="join-error" role="alert"></p>
+    <button type="submit" class="btn accent" id="joinButton">Далі →</button>
+  </form></div>`;
+  $('#registerForm').onsubmit = event => {
+    event.preventDefault();
+    const pin = $('#pin').value.trim();
+    const name = validateName($('#name').value);
+    const contact = validateContact($('#contact').value);
+    if (!/^\d{6}$/.test(pin)) return formError('Введіть шестизначний PIN гри', 'pin');
+    if (!name) return formError('Введіть ім’я з літер, без цифр і нецензурних слів', 'name');
+    if (!contact) return formError('Вкажіть коректний email або телефон', 'contact');
+    renderIntro(pin, { name, contact, interests: details.interests });
+  };
+}
+
+function renderIntro(pin, registration) {
+  const choices = [...defaultInterests, noInterest];
+  app.innerHTML = `<div class="join"><form class="join-card" id="interestForm">
+    <a class="brand" href="#/">${icon} Quizly</a><h1>Давайте познайомимось?</h1>
+    <fieldset class="interest-options"><legend>Чим ви цікавитесь?</legend>
+      <p>Можна обрати кілька варіантів.</p>
+      ${choices.map((label, index) => `<label class="interest-choice"><input type="checkbox" value="${index}"${registration.interests?.includes(label) ? ' checked' : ''}><span>${html(label)}</span></label>`).join('')}
+    </fieldset>
+    <p class="join-error" role="alert"></p>
+    <p class="registration-note">Організатор отримає ваш контакт та інтереси, щоб надалі зв’язатися з вами щодо обраних тем.</p>
+    <button type="submit" class="btn accent" id="joinButton">Приєднатися →</button>
+    <button type="button" class="btn secondary" id="backToRegistration">← Змінити ім’я або контакт</button>
+  </form></div>`;
+  const form = $('#interestForm');
+  const inputs = [...form.querySelectorAll('input[type=checkbox]')];
+  const none = inputs.at(-1);
+  form.onchange = event => {
+    if (!event.target.checked) return;
+    if (event.target === none) inputs.slice(0, -1).forEach(input => { input.checked = false; });
+    else none.checked = false;
+  };
+  form.onsubmit = event => {
+    event.preventDefault();
+    const interests = inputs.filter(input => input.checked).map(input => choices[Number(input.value)]);
+    if (!interests.length) return formError('Оберіть хоча б один варіант');
+    localStorage.setItem('quizly-player-details', JSON.stringify({ ...registration, interests }));
+    connectPlayer(pin, { ...registration, interests });
+  };
+  $('#backToRegistration').onclick = () => {
+    const peer = playerPeer;
+    playerPeer = null;
+    peer?.destroy();
+    joinPage(pin, { ...registration, interests: inputs.filter(input => input.checked).map(input => choices[Number(input.value)]) });
+  };
+}
+function formError(message, field) {
+  const alert = $('.join-error');
+  if (!alert) return toast(message);
+  alert.textContent = message;
+  if (field) $('#' + field)?.focus();
+}
 function connectPlayer(pin,registration){
-  $('#joinButton').disabled=true;$('.join-error').textContent='З’єднуюся з браузером ведучого…';playerPeer?.destroy();const peer=new Peer(undefined,{debug:1});playerPeer=peer;
+  $('#joinButton').disabled = true;
+  $('.join-error').textContent = 'З’єднуюся з браузером ведучого…';
+  const previousPeer = playerPeer;
+  const peer = new Peer(undefined, { debug: 1 });
+  playerPeer = peer;
+  previousPeer?.destroy();
   const playerId=localStorage.getItem('quizly-player-id')||crypto.randomUUID();localStorage.setItem('quizly-player-id',playerId);
-  peer.on('open',()=>{const c=peer.connect(peerPrefix+pin,{reliable:true,serialization:'json'});playerConnection=c;c.on('open',()=>c.send({type:'register',playerId,...registration}));c.on('data',m=>receivePlayerMessage(m,pin));c.on('close',()=>showPlayerConnectionLost(pin));c.on('error',()=>showPlayerConnectionLost(pin));});
-  peer.on('error',error=>{if(error.type==='peer-unavailable'){if($('#joinButton'))$('#joinButton').disabled=false;return formError('Гру з таким PIN не знайдено. Перевірте PIN і вкладку ведучого.');}if($('#joinButton'))$('#joinButton').disabled=false;formError(peerError(error));});
+  peer.on('open', () => {
+    if (playerPeer !== peer) return;
+    const connection = peer.connect(peerPrefix + pin, { reliable: true, serialization: 'json' });
+    playerConnection = connection;
+    connection.on('open', () => connection.send({ type: 'register', playerId, ...registration }));
+    connection.on('data', message => {
+      if (playerPeer === peer) receivePlayerMessage(message, pin);
+    });
+    const lostConnection = () => {
+      if (playerPeer === peer) showPlayerConnectionLost(pin);
+    };
+    connection.on('close', lostConnection);
+    connection.on('error', lostConnection);
+  });
+  peer.on('error', error => {
+    if (playerPeer !== peer) return;
+    const button = $('#joinButton');
+    if (button) button.disabled = false;
+    formError(error.type === 'peer-unavailable'
+      ? 'Гру з таким PIN не знайдено. Перевірте PIN і вкладку ведучого.'
+      : peerError(error));
+  });
 }
 function receivePlayerMessage(message,pin){
   if(message.type==='error'){if($('#joinButton'))$('#joinButton').disabled=false;if($('.join-error'))formError(message.message,message.field);else toast(message.message);return;}
   if(message.type==='registered')return;if(message.type==='answerAccepted')return showAccepted();if(message.type==='state')renderPlayer(message,pin);
 }
-function renderPlayer(state,pin){
-  clearInterval(clockTimer);
-  if(state.status==='lobby'){app.innerHTML=`<div class="join"><div class="join-card notice"><div class="big">✓</div><h1>Ви у грі</h1><p>Очікуємо, поки ведучий почне вікторину.</p></div></div>`;return;}
-  if(state.status==='final')return renderFinal(state,false);
-  const q=state.question;
-  if(state.status==='reading'){app.innerHTML=`<div class="player-q compact-round"><div class="round-controls"><span class="tag">${state.questionIndex+1} / ${state.total}</span>${state.deadline?'<span class="timer" data-player-clock></span>':'<span class="tag">ВЕДУЧИЙ ЧИТАЄ</span>'}</div><main class="mobile-question"><h2>${html(q.text)}</h2>${questionArt(q)}<p class="round-caption">Варіанти з’являться після сигналу ведучого.</p></main></div>`;startPlayerClock(state.deadline);return;}
-  if(state.status==='question'){app.innerHTML=`<div class="player-q compact-round"><div class="round-controls"><span class="tag">${state.questionIndex+1} / ${state.total}</span><span class="timer" data-player-clock></span><span class="tag">${state.ownScore} балів</span></div><h2>${html(q.text)}</h2>${questionArt(q)}<div class="player-answers">${q.answers.map((a,i)=>answerCard(a,a.text,'player-answer',i,state.answered)).join('')}</div><div class="accepted-overlay${state.answered?' visible':''}" id="accepted"><div>✓</div><b>Відповідь прийнято</b></div></div>`;document.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-answer]').forEach(x=>x.disabled=true);playerConnection.send({type:'answer',answerIndex:Number(b.dataset.answer)});});startPlayerClock(state.deadline);return;}
-  const ownId=localStorage.getItem('quizly-player-id'),sorted=[...state.players].sort((a,b)=>b.score-a.score),ownIndex=sorted.findIndex(p=>p.id===ownId);
-  app.innerHTML=`<div class="player-q result-screen"><div class="notice"><div class="big">${state.roundPoints?'✓':'•'}</div><h1>${state.roundPoints?'+'+state.roundPoints+' балів':'Цього разу без балів'}</h1><p>Загальний рахунок: <b>${state.ownScore}</b></p><p>Поточне місце: <b>${ownIndex+1}</b></p></div><div class="player-result-answers">${q.answers.map(a=>answerCard(a,a.text,'player-answer',undefined,false,a.correct)).join('')}</div><p class="round-caption">Очікуємо наступне запитання…</p></div>`;
+
+function renderPlayer(state, pin) {
+  const { status, question, questionIndex, total } = state;
+  const submission = state.answered ? { points: state.roundPoints } : null;
+  const remainingMs = remainingTime(state.deadline);
+  if (status === 'lobby') {
+    app.innerHTML = `<div class="join"><div class="join-card notice"><div class="big">✨</div><h1>Ви в грі!</h1>
+      <p>Чекаємо, поки ведучий запустить вікторину.</p><span class="tag">PIN ${pin}</span> ${fullscreenButton()}</div></div>`;
+    return;
+  }
+  if (status === 'final') return renderResults(state, false);
+  const header = `<header class="round-controls"><span class="tag">${questionIndex + 1}/${total}</span>${clockBadge({ ...state, remainingMs })}${fullscreenButton()}</header>`;
+  let content;
+  if (status === 'result') {
+    const totalScore = state.ownScore;
+    const correct = question.answers.filter(answer => answer.correct).map(answer => html(answer.text)).join(', ');
+    content = `<div class="round-feedback" role="status"><section class="panel">
+      <h2>${submission?.points ? 'Правильно!' : submission ? 'Неправильна відповідь' : 'Час вийшов'}</h2>
+      <strong class="points-earned">+${submission?.points ?? 0} балів</strong>
+      <p>Усього: <b>${totalScore}</b></p>${correct ? `<p>Правильна відповідь: <b>${correct}</b></p>` : ''}
+      <small>Чекаємо на ведучого.</small></section></div>`;
+  } else if (submission) {
+    content = acceptedFeedback();
+  } else {
+    content = `<div class="mobile-question"><h2>${html(question.text)}</h2>${questionArt(question)}
+      ${status === 'reading' ? '<p class="round-caption" role="status">Варіанти з’являться, коли ведучий їх відкриє.</p>' : ''}</div>
+      ${status === 'reading' ? '' : `<div class="player-answers">${roundCards(state, true)}</div>`}`;
+  }
+  app.innerHTML = `<div class="player-q compact-round">${header}${content}</div>`;
+  document.querySelectorAll('[data-answer]').forEach(button => {
+    button.onclick = () => {
+      if (!playerConnection?.open) return toast('Зв’язок із ведучим перервано');
+      document.querySelectorAll('[data-answer]').forEach(card => { card.disabled = true; });
+      playerConnection.send({ type: 'answer', answerIndex: Number(button.dataset.answer) });
+    };
+  });
+  startClock(remainingMs);
 }
-function showAccepted(){const e=$('#accepted');if(e)e.classList.add('visible');}
-function startPlayerClock(deadline){const update=()=>{const e=$('[data-player-clock]');if(e&&deadline)e.textContent=Math.max(0,Math.ceil((deadline-Date.now())/1000));};update();clockTimer=setInterval(update,200);}
+
+function showAccepted() {
+  const answers = $('.player-answers');
+  if (!answers) return;
+  $('.mobile-question')?.remove();
+  answers.outerHTML = acceptedFeedback();
+}
+
+function acceptedFeedback() {
+  return '<div class="round-feedback" role="status"><section class="panel"><div class="feedback-check" aria-hidden="true">✓</div><h2>Відповідь прийнято</h2><p>Бали з’являться після завершення раунду.</p></section></div>';
+}
 function showPlayerConnectionLost(pin){app.innerHTML=`<div class="join"><div class="join-card notice"><div class="big">⌁</div><h1>Зв’язок із ведучим втрачено</h1><p>Перевірте інтернет і переконайтеся, що вкладка ведучого відкрита.</p><a class="btn accent" href="#/join/${pin}">Спробувати знову</a></div></div>`;}
-function renderFinal(state,hostMode){
-  const ownId=hostMode?null:localStorage.getItem('quizly-player-id'),sorted=[...state.players].sort((a,b)=>b.score-a.score),ownIndex=sorted.findIndex(p=>p.id===ownId);
-  app.innerHTML=`<div class="host"><header class="host-head"><div class="brand">${icon} Quizly</div>${hostMode?'<a class="btn secondary" href="#/dashboard">До кабінету</a>':''}</header><main class="leaderboard"><div class="notice"><div class="big">🏆</div><h1>Фінальний рейтинг</h1>${ownIndex>=0?`<p>Ваше місце — <b>${ownIndex+1}</b></p>`:''}${hostMode?'<button class="btn mint" id="finalExport">Завантажити приватний CSV</button>':''}</div>${sorted.map((p,i)=>`<div class="rank${i===ownIndex?' own-rank':''}"><b>${i+1}</b><span>${html(p.name)}${i===ownIndex?' <small>Ви</small>':''}</span><b>${p.score}</b></div>`).join('')}</main></div>`;
-  if(hostMode)$('#finalExport').onclick=()=>askArchivePassword('export');if(hostMode||(ownIndex>=0&&ownIndex<3))launchConfetti();
+function confetti() {
+  const palette = ['#8b5cf6', '#36d399', '#f4b942', '#ef6c8f', '#42d4ff'];
+  return `<div class="confetti" aria-hidden="true">${Array.from({ length: 48 }, (_, i) =>
+    `<i style="--x:${(i * 37) % 100}%;--drift:${(i * 31) % 160 - 80}px;--delay:${i % 12 * 80}ms;--color:${palette[i % palette.length]}"></i>`).join('')}</div>`;
 }
-function launchConfetti(){const layer=document.createElement('div');layer.className='confetti-layer';for(let i=0;i<90;i++){const p=document.createElement('i');p.style.left=Math.random()*100+'%';p.style.background=colors[i%colors.length];p.style.animationDelay=Math.random()*1.8+'s';p.style.animationDuration=2.2+Math.random()*2+'s';layer.append(p);}document.body.append(layer);setTimeout(()=>layer.remove(),6000);}
+
+function renderResults(state, hostMode) {
+  clearInterval(clockTimer);
+  if ($('#finalResults')) return;
+  const sorted = [...state.players].sort((a, b) => b.score - a.score);
+  const ownIndex = hostMode ? -1 : sorted.findIndex(player => player.id === localStorage.getItem('quizly-player-id'));
+  const celebrate = hostMode || (ownIndex >= 0 && ownIndex < 3);
+  app.innerHTML = `<div class="host" id="finalResults">
+    ${celebrate ? confetti() : ''}
+    <header class="host-head"><div class="brand">${icon} Quizly</div>${hostMode ? '<a class="btn secondary" href="#/dashboard">До кабінету</a>' : ''}</header>
+    <main class="leaderboard"><div class="notice"><div class="big" aria-hidden="true">🏆</div><h1>Фінальний рейтинг</h1>
+      ${ownIndex >= 0 ? `<p>Ваше місце — <b>${ownIndex + 1}</b></p>` : ''}
+      ${hostMode ? '<button class="btn mint" id="finalExport">Завантажити приватний CSV</button>' : ''}</div>
+      ${sorted.map((player, index) => `<div class="rank${index === ownIndex ? ' own-rank' : ''}"><b>${index + 1}</b>
+        <span>${html(player.name)}${index === ownIndex ? ' <small>Ви</small>' : ''}</span><b>${player.score}</b></div>`).join('')}
+    </main></div>`;
+  if (hostMode) $('#finalExport').onclick = () => askArchivePassword('export');
+  $('.own-rank')?.scrollIntoView({ block: 'nearest' });
+}
 
 const blockedName=/(?:ху[йяєюиеі]|п[іи]зд|бля(?:д|т)|[єеё]ба[тнл]|їба[тнл]|мудак|гандон|довбойоб|долбо[её]б|fuck|shit|bitch|nigg[ea]r)/u;
 const lookalikes=['aа','bв','cс','eе','hн','iі','kк','mм','oо','pр','tт','yу','xх'],cyrillicLetters=new Map(lookalikes.map(([a,b])=>[a,b])),latinLetters=new Map(lookalikes.map(([a,b])=>[b,a]));
