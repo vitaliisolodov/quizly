@@ -39,7 +39,7 @@ function askArchivePassword(mode,quiz){
   document.querySelector('.password-modal')?.remove();
   const modal=document.createElement('div');modal.className='password-modal';modal.innerHTML=`<form class="password-dialog"><button type="button" class="modal-close" aria-label="Закрити">×</button><div class="tag">ПРИВАТНИЙ АРХІВ</div><h2>${mode==='start'?'Захистіть контакти':'Відкрийте архів'}</h2><p>${mode==='start'?'Придумайте або введіть пароль цього браузера. Він шифрує імена й контакти учасників.':'Введіть пароль, яким зашифровано контакти в цьому браузері.'}</p><label>Пароль<input name="password" type="password" minlength="8" autocomplete="current-password" required placeholder="Щонайменше 8 символів"></label><small>Збережіть пароль: відновити його неможливо.</small><button class="btn mint" type="submit">${mode==='start'?'Створити гру':'Завантажити CSV'}</button></form>`;
   const close=()=>modal.remove();modal.querySelector('.modal-close').onclick=close;modal.onclick=e=>{if(e.target===modal)close();};
-  modal.querySelector('form').onsubmit=async event=>{event.preventDefault();const button=event.submitter, password=new FormData(event.currentTarget).get('password');button.disabled=true;button.textContent='Перевіряю…';try{const key=await unlockArchive(password);if(mode==='export'){await downloadArchive(key);close();return;}archiveKey=key;close();app.innerHTML='<div class="notice"><div class="big">◌</div><h2>Створюю P2P-кімнату…</h2></div>';createHostPeer(quiz,0);}catch(error){toast(error.message);button.disabled=false;button.textContent=mode==='start'?'Створити гру':'Завантажити CSV';}};
+  modal.querySelector('form').onsubmit=async event=>{event.preventDefault();const button=event.submitter, password=new FormData(event.currentTarget).get('password');button.disabled=true;button.textContent='Перевіряю…';try{const key=await unlockArchive(password);if(mode==='export'){await downloadArchive(key);close();return;}archiveKey=key;close();app.innerHTML='<div class="notice"><div class="big">◌</div><h2>Створюю кімнату…</h2></div>';createHostPeer(quiz,0);}catch(error){toast(error.message);button.disabled=false;button.textContent=mode==='start'?'Створити гру':'Завантажити CSV';}};
   document.body.append(modal);setTimeout(()=>modal.querySelector('input').focus(),0);
 }
 function createHostPeer(quiz, attempt, resume = null) {
@@ -50,7 +50,7 @@ function createHostPeer(quiz, attempt, resume = null) {
   if(attempt>8)return showFatal('Не вдалося підібрати вільний PIN. Спробуйте ще раз.');
   const pin = resume?.pin ?? String(Math.floor(100000 + Math.random() * 900000));
   hostPeer?.destroy();
-  const peer = new Peer(peerPrefix + pin, { debug: 1 });
+  const peer = createQuizPeer(peerPrefix + pin);
   hostPeer = peer;
   let opened = false;
   let reconnectTimer;
@@ -101,6 +101,7 @@ function createHostPeer(quiz, attempt, resume = null) {
   peer.on('error', error => {
     if (hostPeer !== peer) return;
     if (opened) {
+      if (peer.disconnected) scheduleRecovery();
       toast('Збій зв’язку із сервісом підключення. Перевірте інтернет, залишивши вкладку гри відкритою.');
       return;
     }
@@ -271,6 +272,7 @@ function renderHost() {
   const qz = s.quiz;
   if(s.status==='lobby'){
     const joinUrl=new URL(location.href);joinUrl.hash='#/join/'+s.pin;
+    if (hostPeer?.fingerprint) joinUrl.hash += '?key=' + hostPeer.fingerprint;
     app.innerHTML=`<div class="host"><header class="host-head"><a class="brand" href="#/dashboard">${icon} Quizly</a><div class="round-controls">PIN <span class="pin">${s.pin}</span>${fullscreenButton()}</div></header><main class="lobby"><div class="qr-card"><div id="qr"></div><b>Скануйте QR або введіть PIN</b><small>${html(joinUrl.href)}</small></div><section><span class="tag">ЛОБІ • ${s.players.length} УЧАСНИКІВ</span><h1 style="font:700 42px Unbounded">${html(qz.title)}</h1><div class="players">${s.players.map(p=>`<span class="chip">${html(p.name)}</span>`).join('')||'<p>Очікую на учасників…</p>'}</div><button class="btn accent" id="startGame" style="margin-top:28px" ${s.players.length ? '' : 'disabled'}>Почати гру →</button></section></main></div>`;
     new QRCode($('#qr'),{text:joinUrl.href,width:280,height:280,colorDark:'#11102c',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});$('#startGame').onclick=startGame;return;
   }
@@ -433,14 +435,16 @@ function connectPlayer(pin, registration) {
       button.disabled = true;
       formError('З’єднуюся з браузером ведучого…');
     }
-    const current = new Peer(undefined, { debug: 1 });
+    const current = createQuizPeer();
     peer = current;
     let stage = 'signal';
     let ready = false;
     attemptTimer = setTimeout(() => {
       const message = {
         signal: 'Сервіс підключення не відповідає. Перевірте інтернет і повторіть спробу.',
-        channel: 'Не вдалося встановити зв’язок із ведучим. Спробуйте іншу мережу або відкрийте гру у звичайному браузері.',
+        channel: window.QUIZLY_RELAY_URL
+          ? 'Сервер не підтвердив вхід до кімнати. Перевірте PIN і спробуйте ще раз.'
+          : 'Не вдалося встановити зв’язок із ведучим. Спробуйте іншу мережу або відкрийте гру у звичайному браузері.',
         registration: 'Браузер ведучого не підтвердив реєстрацію. Повідомте ведучого й повторіть спробу.'
       }[stage];
       fail(current, message);
@@ -600,7 +604,16 @@ const lookalikes=['aа','bв','cс','eе','hн','iі','kк','mм','oо','pр','t
 function validateName(value){if(typeof value!=='string')return;const name=value.normalize('NFKC').trim().replace(/\s+/g,' ');if(name.length>28||!/^\p{L}\p{M}*(?:[ ’'ʼ-]?\p{L}\p{M}*)+$/u.test(name))return;const normalized=name.toLowerCase().replace(/[^\p{L}]/gu,''),cyrillic=[...normalized].map(c=>cyrillicLetters.get(c)??c).join(''),latin=[...normalized].map(c=>latinLetters.get(c)??c).join(''),whole=/(?:^|[ ’'ʼ-])(?:сука|суки|сучка|бля|хер)(?=$|[ ’'ʼ-])/u;if(whole.test(name.toLowerCase())||[normalized,cyrillic,latin].some(t=>blockedName.test(t)||whole.test(t)))return;return name;}
 function validateContact(value){const c=String(value||'').trim(),phone=/^\+?[\d\s()\-]+$/.test(c)&&/^\d{9,15}$/.test(c.replace(/\D/g,'')),email=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c);return c.length<=80&&(phone||email)?c:undefined;}
 function normalizeInterests(values){const allowed=new Set([...defaultInterests,noInterest]),clean=[...new Set((Array.isArray(values)?values:[]).filter(v=>allowed.has(v)))];return clean.includes(noInterest)?[noInterest]:clean.slice(0,8);}
-function peerError(error){return ({'browser-incompatible':'Цей браузер не підтримує WebRTC.','network':'Не вдалося зв’язатися із сервісом P2P.','server-error':'Сервіс P2P тимчасово недоступний.','ssl-unavailable':'Для P2P потрібне захищене HTTPS-з’єднання.'})[error?.type]||'Помилка P2P-з’єднання. Спробуйте ще раз.';}
+function peerError(error) {
+  return ({
+    'browser-incompatible': 'Цей браузер не підтримує WebRTC.',
+    'network': 'Не вдалося зв’язатися із сервісом підключення.',
+    'server-error': 'Сервіс підключення тимчасово недоступний.',
+    'ssl-unavailable': 'Для гри потрібне захищене HTTPS-з’єднання.',
+    'room-full': 'У цій кімнаті вже максимальна кількість учасників.',
+    'host-key-mismatch': 'Цей QR-код не відповідає поточній кімнаті. Відскануйте новий QR-код ведучого.'
+  })[error?.type] || 'Помилка з’єднання. Спробуйте ще раз.';
+}
 function showFatal(message){app.innerHTML=`<div class="join"><div class="join-card notice"><div class="big">!</div><h1>Не вдалося запустити гру</h1><p>${html(message)}</p><a class="btn accent" href="#/dashboard">Повернутися</a></div></div>`;}
 
 function openDatabase(){return new Promise((resolve,reject)=>{const request=indexedDB.open('quizly-private-archive',1);request.onupgradeneeded=()=>{const db=request.result;db.createObjectStore('meta',{keyPath:'key'});db.createObjectStore('records',{keyPath:'id'});};request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error);});}
@@ -636,7 +649,7 @@ async function route(){
   const hash=location.hash||'#/';
   cancelPlayerConnection();
   if(hash.startsWith('#/host/')){if(hostSession)renderHost();else showFatal('Сесію ведучого втрачено після перезавантаження вкладки. Створіть нову гру.');return;}
-  if(hash.startsWith('#/join/'))return joinPage(hash.split('/')[2]||'');
+  if(hash.startsWith('#/join/'))return joinPage(hash.split('?')[0].split('/')[2]||'');
   if(hash==='#/join')return joinPage();
   if(hash==='#/dashboard')return dashboard();
   home();
