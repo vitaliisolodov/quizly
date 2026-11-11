@@ -5,7 +5,10 @@ const colors = ['#f28aad', '#ffc857', '#54dcb0', '#b695ff'];
 const noInterest = 'Ніщо з цього не цікавить';
 const defaultInterests = ['Фото', 'Відео', 'Ігри', 'Програмування', 'Електроніка', '3D-графіка', 'Радіозв’язок і мережі', 'Кібербезпека'];
 const peerPrefix = 'quizly-gh-v1-';
-let quizzes = [], hostSession = null, hostPeer = null, playerPeer = null, playerConnection = null, archiveKey = null, clockTimer = null;
+const connectionTimeout = 15000;
+let quizzes = [], hostSession = null, hostPeer = null, playerConnection = null, archiveKey = null, clockTimer = null;
+let cancelPlayerConnection = () => {};
+const preloadedImages = new Set();
 
 function html(value) {
   return String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[char]);
@@ -39,17 +42,86 @@ function askArchivePassword(mode,quiz){
   modal.querySelector('form').onsubmit=async event=>{event.preventDefault();const button=event.submitter, password=new FormData(event.currentTarget).get('password');button.disabled=true;button.textContent='Перевіряю…';try{const key=await unlockArchive(password);if(mode==='export'){await downloadArchive(key);close();return;}archiveKey=key;close();app.innerHTML='<div class="notice"><div class="big">◌</div><h2>Створюю P2P-кімнату…</h2></div>';createHostPeer(quiz,0);}catch(error){toast(error.message);button.disabled=false;button.textContent=mode==='start'?'Створити гру':'Завантажити CSV';}};
   document.body.append(modal);setTimeout(()=>modal.querySelector('input').focus(),0);
 }
-function createHostPeer(quiz,attempt) {
+function createHostPeer(quiz, attempt, resume = null) {
+  if (resume && attempt >= 3) {
+    toast('Не вдалося відновити прийом нових підключень. Перевірте інтернет.');
+    return;
+  }
   if(attempt>8)return showFatal('Не вдалося підібрати вільний PIN. Спробуйте ще раз.');
-  const pin=String(Math.floor(100000+Math.random()*900000));
-  const peer=new Peer(peerPrefix+pin,{debug:1});hostPeer=peer;let opened=false;
-  peer.on('open',()=>{opened=true;hostSession={id:crypto.randomUUID(),pin,quiz,status:'lobby',questionIndex:-1,players:[],connections:new Map(),answers:new Map(),deadline:0,timer:null,allAnswered:false};peer.on('connection',setupHostConnection);location.hash='#/host/'+pin;renderHost();});
-  peer.on('error',error=>{if(!opened&&error.type==='unavailable-id'){peer.destroy();return createHostPeer(quiz,attempt+1);}showFatal(peerError(error));});
+  const pin = resume?.pin ?? String(Math.floor(100000 + Math.random() * 900000));
+  hostPeer?.destroy();
+  const peer = new Peer(peerPrefix + pin, { debug: 1 });
+  hostPeer = peer;
+  let opened = false;
+  let reconnectTimer;
+  const startupTimer = setTimeout(() => failStartup('Не вдалося створити кімнату за 15 секунд. Перевірте інтернет і спробуйте ще раз.'), connectionTimeout);
+
+  function failStartup(message) {
+    if (hostPeer !== peer) return;
+    clearTimeout(startupTimer);
+    hostPeer = null;
+    peer.destroy();
+    if (resume) {
+      setTimeout(() => {
+        if (!hostPeer && hostSession === resume && location.hash === '#/host/' + pin) {
+          createHostPeer(quiz, attempt + 1, resume);
+        }
+      }, 1000 * 2 ** attempt);
+      return;
+    }
+    showFatal(message);
+  }
+
+  peer.on('open', () => {
+    if (hostPeer !== peer) return;
+    clearTimeout(startupTimer);
+    clearTimeout(reconnectTimer);
+    if (opened) return;
+    opened = true;
+    hostSession = resume ?? { id: crypto.randomUUID(), pin, quiz, status: 'lobby', questionIndex: -1,
+      players: [], connections: new Map(), answers: new Map(), deadline: 0, timer: null, allAnswered: false };
+    location.hash = '#/host/' + pin;
+    renderHost();
+  });
+  peer.on('connection', connection => {
+    if (hostPeer === peer) setupHostConnection(connection);
+    else connection.close();
+  });
+  function scheduleRecovery() {
+    if (!opened || hostPeer !== peer || hostSession.status === 'final') return;
+    clearTimeout(reconnectTimer);
+    reconnectTimer = setTimeout(() => {
+      if (hostPeer !== peer || location.hash !== '#/host/' + pin) return;
+      if (peer.destroyed) createHostPeer(quiz, 0, hostSession);
+      else if (peer.disconnected) peer.reconnect();
+    }, 1500);
+  }
+  peer.on('disconnected', scheduleRecovery);
+  peer.on('close', scheduleRecovery);
+  peer.on('error', error => {
+    if (hostPeer !== peer) return;
+    if (opened) {
+      toast('Збій зв’язку із сервісом підключення. Перевірте інтернет, залишивши вкладку гри відкритою.');
+      return;
+    }
+    if (resume || error.type !== 'unavailable-id') return failStartup(peerError(error));
+    clearTimeout(startupTimer);
+    hostPeer = null;
+    peer.destroy();
+    createHostPeer(quiz, attempt + 1);
+  });
 }
 function setupHostConnection(connection) {
   connection.on('data',message=>receiveHostMessage(connection,message));
-  connection.on('close',()=>{if(!hostSession||!connection.playerId)return;const p=hostSession.players.find(x=>x.id===connection.playerId);if(p)p.connected=false;hostSession.connections.delete(connection.playerId);broadcast();});
-  connection.on('error',()=>{});
+  connection.on('close', () => {
+    const id = connection.playerId;
+    if (hostSession?.connections.get(id) !== connection) return;
+    hostSession.connections.delete(id);
+    const player = hostSession.players.find(item => item.id === id);
+    if (player) player.connected = false;
+    renderHost();
+  });
+  connection.on('error', () => connection.close());
 }
 async function receiveHostMessage(connection,message) {
   if(!hostSession||!message||typeof message!=='object')return;
@@ -59,12 +131,35 @@ async function receiveHostMessage(connection,message) {
     if(!contact)return connection.send({type:'error',field:'contact',message:'Вкажіть коректний email або телефон'});
     if(!interests.length)return connection.send({type:'error',field:'interests',message:'Оберіть хоча б один варіант'});
     const playerId=/^[a-f0-9-]{16,64}$/i.test(message.playerId||'')?message.playerId:crypto.randomUUID();
-    let player=hostSession.players.find(x=>x.id===playerId);
-    if(!player){player={id:playerId,name,contact,interests,score:0,roundPoints:0,connected:true};hostSession.players.push(player);}else Object.assign(player,{name,contact,interests,connected:true});
-    connection.playerId=playerId;hostSession.connections.set(playerId,connection);await savePlayerRecord(player);connection.send({type:'registered',playerId});broadcast();return;
+    const session = hostSession;
+    const existing = session.players.find(item => item.id === playerId);
+    const candidate = { ...existing, id: playerId, name, contact, interests, connected: true,
+      score: existing?.score ?? 0, roundPoints: existing?.roundPoints ?? 0 };
+    const sameRegistration = existing && existing.name === name && existing.contact === contact &&
+      JSON.stringify(existing.interests) === JSON.stringify(interests);
+    try {
+      if (!sameRegistration) await savePlayerRecord(candidate);
+    } catch {
+      if (connection.open) connection.send({ type: 'error', message: 'Ведучий не зміг зберегти реєстрацію. Повідомте ведучого й повторіть спробу.' });
+      toast('Не вдалося зберегти контакт у приватному архіві.');
+      return;
+    }
+    if (hostSession !== session || !connection.open) return;
+    const player = session.players.find(item => item.id === playerId);
+    if (player) Object.assign(player, { name, contact, interests, connected: true });
+    else session.players.push(candidate);
+    const previous = session.connections.get(playerId);
+    connection.playerId = playerId;
+    session.connections.set(playerId, connection);
+    if (previous !== connection) previous?.close();
+    connection.send({ type: 'registered', playerId, heartbeat: true });
+    connection.send(publicState(playerId));
+    renderHost();
+    return;
   }
   const player=hostSession.players.find(x=>x.id===connection.playerId);
-  if(!player)return connection.send({type:'error',message:'Спочатку зареєструйтеся'});
+  if (!player || hostSession.connections.get(player.id) !== connection) return;
+  if (message.type === 'ping') connection.send({ type: 'pong' });
   if (message.type === 'answer') acceptAnswer(player, message, connection);
 }
 function activePlayers(){return hostSession.players.filter(p=>p.connected);}
@@ -90,7 +185,7 @@ function acceptAnswer(player, message, connection) {
 }
 function publicState(playerId){
   const s=hostSession,q=s.questionIndex>=0?s.quiz.questions[s.questionIndex]:null,revealed=s.status==='result',p=s.players.find(x=>x.id===playerId);
-  return {type:'state',pin:s.pin,quizTitle:s.quiz.title,status:s.status,questionIndex:s.questionIndex,total:s.quiz.questions.length,deadline:s.deadline,remainingMs:remainingTime(s.deadline),allAnswered:s.allAnswered,question:q?{text:q.text,image:q.image,answers:s.status==='reading'?[]:q.answers.map(({text,image,tile,color,correct})=>({text,image,tile,color,...(revealed?{correct}:{})}))}:null,players:s.players.map(x=>({id:x.id,name:x.name,score:x.score})),ownScore:p?.score||0,roundPoints:p?.roundPoints||0,answered:s.answers.has(playerId)};
+  return {type:'state',pin:s.pin,quizTitle:s.quiz.title,status:s.status,questionIndex:s.questionIndex,total:s.quiz.questions.length,deadline:s.deadline,remainingMs:remainingTime(s.deadline),allAnswered:s.allAnswered,preloadImages:s.status==='reading' ? [...new Set(q.answers.map(answer=>answer.image).filter(Boolean))] : [],question:q?{text:q.text,image:q.image,answers:s.status==='reading'?[]:q.answers.map(({text,image,tile,color,correct})=>({text,image,tile,color,...(revealed?{correct}:{})}))}:null,players:s.players.map(x=>({id:x.id,name:x.name,score:x.score})),ownScore:p?.score||0,roundPoints:p?.roundPoints||0,answered:s.answers.has(playerId)};
 }
 function broadcast(){if(!hostSession)return;for(const [id,c] of hostSession.connections)if(c.open)c.send(publicState(id));renderHost();}
 function startGame(){if(!hostSession.players.length)return toast('Дочекайтеся хоча б одного гравця');hostSession.questionIndex=-1;nextQuestion();}
@@ -108,7 +203,12 @@ function openAnswers(){
 async function revealQuestion(allAnswered){
   if(!hostSession||hostSession.status!=='question')return;clearTimeout(hostSession.timer);const q=hostSession.quiz.questions[hostSession.questionIndex],duration=Math.max(5,Number(q.time)||20)*1000;
   for(const p of hostSession.players){const a=hostSession.answers.get(p.id),correct=a&&q.answers[a.answerIndex]?.correct;p.roundPoints=correct?500+Math.floor(500*Math.max(0,hostSession.deadline-a.answeredAt)/duration):0;p.score+=p.roundPoints;}
-  hostSession.status='result';hostSession.allAnswered=allAnswered;hostSession.deadline=0;await Promise.all(hostSession.players.map(savePlayerRecord));broadcast();
+  hostSession.status = 'result';
+  hostSession.allAnswered = allAnswered;
+  hostSession.deadline = 0;
+  const saved = await Promise.allSettled(hostSession.players.map(savePlayerRecord));
+  if (saved.some(item => item.status === 'rejected')) toast('Не вдалося оновити частину балів у приватному архіві.');
+  broadcast();
 }
 function fullscreenButton() {
   return document.fullscreenEnabled
@@ -263,9 +363,7 @@ function renderIntro(pin, registration) {
     connectPlayer(pin, { ...registration, interests });
   };
   $('#backToRegistration').onclick = () => {
-    const peer = playerPeer;
-    playerPeer = null;
-    peer?.destroy();
+    cancelPlayerConnection();
     joinPage(pin, { ...registration, interests: inputs.filter(input => input.checked).map(input => choices[Number(input.value)]) });
   };
 }
@@ -275,43 +373,147 @@ function formError(message, field) {
   alert.textContent = message;
   if (field) $('#' + field)?.focus();
 }
-function connectPlayer(pin,registration){
-  $('#joinButton').disabled = true;
-  $('.join-error').textContent = 'З’єднуюся з браузером ведучого…';
-  const previousPeer = playerPeer;
-  const peer = new Peer(undefined, { debug: 1 });
-  playerPeer = peer;
-  previousPeer?.destroy();
-  const playerId=localStorage.getItem('quizly-player-id')||crypto.randomUUID();localStorage.setItem('quizly-player-id',playerId);
-  peer.on('open', () => {
-    if (playerPeer !== peer) return;
-    const connection = peer.connect(peerPrefix + pin, { reliable: true, serialization: 'json' });
-    playerConnection = connection;
-    connection.on('open', () => connection.send({ type: 'register', playerId, ...registration }));
-    connection.on('data', message => {
-      if (playerPeer === peer) receivePlayerMessage(message, pin);
-    });
-    const lostConnection = () => {
-      if (playerPeer === peer) showPlayerConnectionLost(pin);
-    };
-    connection.on('close', lostConnection);
-    connection.on('error', lostConnection);
-  });
-  peer.on('error', error => {
-    if (playerPeer !== peer) return;
+function connectPlayer(pin, registration) {
+  cancelPlayerConnection();
+  const playerId = sessionStorage.getItem('quizly-player-id') || crypto.randomUUID();
+  sessionStorage.setItem('quizly-player-id', playerId);
+  let cancelled = false;
+  let joined = false;
+  let finished = false;
+  let retries = 0;
+  let attemptTimer;
+  let retryTimer;
+  let heartbeatTimer;
+  let peer;
+
+  function disposeAttempt() {
+    clearTimeout(attemptTimer);
+    clearInterval(heartbeatTimer);
+    heartbeatTimer = undefined;
+    const current = peer;
+    peer = null;
+    playerConnection = null;
+    current?.destroy();
+  }
+
+  cancelPlayerConnection = () => {
+    cancelled = true;
+    clearTimeout(retryTimer);
+    disposeAttempt();
+  };
+
+  function fail(current, message, canRetry = true) {
+    if (cancelled || peer !== current) return;
+    disposeAttempt();
+    if (finished) return;
+    if (!joined) {
+      const button = $('#joinButton');
+      if (button) button.disabled = false;
+      formError(message);
+      return;
+    }
+    if (canRetry && retries < 3) {
+      const delay = 1000 * 2 ** retries;
+      retries++;
+      showPlayerReconnect(pin, null);
+      retryTimer = setTimeout(attempt, delay);
+    } else {
+      showPlayerReconnect(pin, () => {
+        retries = 0;
+        showPlayerReconnect(pin, null);
+        attempt();
+      });
+    }
+  }
+
+  function attempt() {
+    if (cancelled) return;
     const button = $('#joinButton');
-    if (button) button.disabled = false;
-    formError(error.type === 'peer-unavailable'
-      ? 'Гру з таким PIN не знайдено. Перевірте PIN і вкладку ведучого.'
-      : peerError(error));
-  });
-}
-function receivePlayerMessage(message,pin){
-  if(message.type==='error'){if($('#joinButton'))$('#joinButton').disabled=false;if($('.join-error'))formError(message.message,message.field);else toast(message.message);return;}
-  if(message.type==='registered')return;if(message.type==='answerAccepted')return showAccepted();if(message.type==='state')renderPlayer(message,pin);
+    if (button) {
+      button.disabled = true;
+      formError('З’єднуюся з браузером ведучого…');
+    }
+    const current = new Peer(undefined, { debug: 1 });
+    peer = current;
+    let stage = 'signal';
+    let ready = false;
+    attemptTimer = setTimeout(() => {
+      const message = {
+        signal: 'Сервіс підключення не відповідає. Перевірте інтернет і повторіть спробу.',
+        channel: 'Не вдалося встановити зв’язок із ведучим. Спробуйте іншу мережу або відкрийте гру у звичайному браузері.',
+        registration: 'Браузер ведучого не підтвердив реєстрацію. Повідомте ведучого й повторіть спробу.'
+      }[stage];
+      fail(current, message);
+    }, connectionTimeout);
+
+    current.on('open', () => {
+      if (peer !== current) return;
+      stage = 'channel';
+      const connection = current.connect(peerPrefix + pin, { reliable: true, serialization: 'json' });
+      playerConnection = connection;
+      let lastMessage = performance.now();
+      const lost = () => fail(current, 'Зв’язок із браузером ведучого перервався. Повторіть спробу.');
+      connection.on('open', () => {
+        if (peer !== current) return;
+        stage = 'registration';
+        connection.send({ type: 'register', playerId, ...registration });
+      });
+      connection.on('data', message => {
+        if (peer !== current) return;
+        lastMessage = performance.now();
+        if (message.type === 'registered' && message.heartbeat && !heartbeatTimer) {
+          heartbeatTimer = setInterval(() => {
+            if (document.hidden || finished) {
+              lastMessage = performance.now();
+              return;
+            }
+            if (performance.now() - lastMessage > connectionTimeout) {
+              lost();
+              return;
+            }
+            if (connection.open) connection.send({ type: 'ping' });
+            else lost();
+          }, 5000);
+        }
+        if (message.type === 'error') {
+          if (!ready) fail(current, message.message, false);
+          else toast(message.message);
+          return;
+        }
+        if (message.type === 'state') {
+          clearTimeout(attemptTimer);
+          joined = ready = true;
+          finished = message.status === 'final';
+          if (finished) clearInterval(heartbeatTimer);
+          retries = 0;
+          renderPlayer(message, pin);
+        } else if (message.type === 'answerAccepted') {
+          showAccepted();
+        }
+      });
+      connection.on('close', lost);
+      connection.on('error', lost);
+    });
+    current.on('error', error => {
+      if (ready && playerConnection?.open && ['network', 'disconnected'].includes(error.type)) return;
+      fail(current, error.type === 'peer-unavailable'
+        ? 'Гру з таким PIN не знайдено. Перевірте PIN і вкладку ведучого.'
+        : peerError(error), error.type !== 'browser-incompatible');
+    });
+  }
+
+  attempt();
 }
 
 function renderPlayer(state, pin) {
+  for (const path of state.preloadImages ?? []) {
+    const url = asset(path);
+    if (preloadedImages.has(url)) continue;
+    preloadedImages.add(url);
+    const image = new Image();
+    image.onerror = () => preloadedImages.delete(url);
+    image.src = url;
+  }
   const { status, question, questionIndex, total } = state;
   const submission = state.answered ? { points: state.roundPoints } : null;
   const remainingMs = state.remainingMs === undefined ? remainingTime(state.deadline) : state.remainingMs;
@@ -359,7 +561,15 @@ function showAccepted() {
 function acceptedFeedback() {
   return '<div class="round-feedback" role="status"><section class="panel"><div class="feedback-check" aria-hidden="true">✓</div><h2>Відповідь прийнято</h2><p>Бали з’являться після завершення раунду.</p></section></div>';
 }
-function showPlayerConnectionLost(pin){app.innerHTML=`<div class="join"><div class="join-card notice"><div class="big">⌁</div><h1>Зв’язок із ведучим втрачено</h1><p>Перевірте інтернет і переконайтеся, що вкладка ведучого відкрита.</p><a class="btn accent" href="#/join/${pin}">Спробувати знову</a></div></div>`;}
+function showPlayerReconnect(pin, retry) {
+  clearInterval(clockTimer);
+  app.innerHTML = `<div class="join"><div class="join-card notice" role="status"><div class="big">⌁</div>
+    <h1>${retry ? 'Зв’язок із ведучим втрачено' : 'Відновлюю зв’язок із ведучим…'}</h1>
+    <p>PIN гри ${html(pin)}</p>
+    ${retry ? '<button type="button" class="btn accent" id="retryConnection">Спробувати знову</button>' : ''}
+  </div></div>`;
+  if (retry) $('#retryConnection').onclick = retry;
+}
 function confetti() {
   const palette = ['#8b5cf6', '#36d399', '#f4b942', '#ef6c8f', '#42d4ff'];
   return `<div class="confetti" aria-hidden="true">${Array.from({ length: 48 }, (_, i) =>
@@ -370,7 +580,7 @@ function renderResults(state, hostMode) {
   clearInterval(clockTimer);
   if ($('#finalResults')) return;
   const sorted = [...state.players].sort((a, b) => b.score - a.score);
-  const ownIndex = hostMode ? -1 : sorted.findIndex(player => player.id === localStorage.getItem('quizly-player-id'));
+  const ownIndex = hostMode ? -1 : sorted.findIndex(player => player.id === sessionStorage.getItem('quizly-player-id'));
   const celebrate = hostMode || (ownIndex >= 0 && ownIndex < 3);
   app.innerHTML = `<div class="host" id="finalResults">
     ${celebrate ? confetti() : ''}
@@ -407,7 +617,16 @@ async function unlockArchive(password){
   if(!meta){const salt=crypto.getRandomValues(new Uint8Array(16)),key=await deriveArchiveKey(password,salt),verifier=await encryptValue(key,{value:'quizly-private-archive-v1'});meta={key:'archive',salt:bytesToBase64(salt),...verifier};await idbPut('meta',meta);return key;}
   try{const key=await deriveArchiveKey(password,base64ToBytes(meta.salt)),verifier=await decryptValue(key,meta);if(verifier.value!=='quizly-private-archive-v1')throw new Error();return key;}catch{throw new Error('Неправильний пароль приватного архіву');}
 }
-async function savePlayerRecord(player){if(!archiveKey||!hostSession)return;const record={joinedAt:new Date().toISOString(),quiz:hostSession.quiz.title,pin:hostSession.pin,name:player.name,contact:player.contact,interests:player.interests,score:player.score},encrypted=await encryptValue(archiveKey,record);await idbPut('records',{id:hostSession.id+':'+player.id,...encrypted});}
+async function savePlayerRecord(player) {
+  const session = hostSession;
+  if (!archiveKey || !session) return;
+  const record = {
+    joinedAt: new Date().toISOString(), quiz: session.quiz.title, pin: session.pin,
+    name: player.name, contact: player.contact, interests: player.interests, score: player.score
+  };
+  const encrypted = await encryptValue(archiveKey, record);
+  await idbPut('records', { id: session.id + ':' + player.id, ...encrypted });
+}
 async function downloadArchive(key){
   const encrypted=await idbAll('records'),records=await Promise.all(encrypted.map(x=>decryptValue(key,x)));records.sort((a,b)=>b.joinedAt.localeCompare(a.joinedAt));const rows=[['Дата','Вікторина','PIN','Ім’я','Контакт','Інтереси','Бали'],...records.map(r=>[r.joinedAt,r.quiz,r.pin,r.name,r.contact,r.interests.join('; '),r.score])],csv='\ufeff'+rows.map(row=>row.map(csvCell).join(',')).join('\r\n'),link=document.createElement('a');link.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));link.download='quizly-private-contacts-'+new Date().toISOString().slice(0,10)+'.csv';link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000);
 }
@@ -415,6 +634,7 @@ function csvCell(value){const text=String(value??''),safe=/^\s*[=+\-@\t\r\n]/.te
 
 async function route(){
   const hash=location.hash||'#/';
+  cancelPlayerConnection();
   if(hash.startsWith('#/host/')){if(hostSession)renderHost();else showFatal('Сесію ведучого втрачено після перезавантаження вкладки. Створіть нову гру.');return;}
   if(hash.startsWith('#/join/'))return joinPage(hash.split('/')[2]||'');
   if(hash==='#/join')return joinPage();
