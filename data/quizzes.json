@@ -1646,25 +1646,29 @@
         "answers": [
           {
             "text": "Це мистецтво, яким зараз захоплюються медіаінженери та цифрові художники",
-            "image": "",
+            "image": "/assets/quiz-khnure/15-answers.webp",
+            "tile": 0,
             "correct": true,
             "color": "#f28aad"
           },
           {
             "text": "Мистецтво, яке передається через генетику",
-            "image": "",
+            "image": "/assets/quiz-khnure/15-answers.webp",
+            "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "Візуальний контент, який створюється в реальному часі на основі математичних алгоритмів",
-            "image": "",
+            "image": "/assets/quiz-khnure/15-answers.webp",
+            "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Коли ти випадково розлив каву на клавіатуру, і воно саме щось намалювало",
-            "image": "",
+            "image": "/assets/quiz-khnure/15-answers.webp",
+            "tile": 3,
             "correct": false,
             "color": "#b695ff"
           }
@@ -1781,29 +1785,34 @@
       },
       {
         "text": "Зараз ви перебуваєте в суперуніверситеті ХНУРЕ. У кого можна дізнатися інформацію про вступ до нього?",
+        "image": "/assets/quiz-khnure/19-question.webp",
         "time": 20,
         "answers": [
           {
             "text": "У приймальній комісії та на сайті",
-            "image": "",
+            "image": "/assets/quiz-khnure/19-answers.webp",
+            "tile": 0,
             "correct": false,
             "color": "#f28aad"
           },
           {
             "text": "У відповідальної за вступ Колендовської Марини за тел. +380 50 401 20 27",
-            "image": "",
+            "image": "/assets/quiz-khnure/19-answers.webp",
+            "tile": 1,
             "correct": false,
             "color": "#ffc857"
           },
           {
             "text": "У декана Дениса Горелова за тел. +380 67 572 79 95",
-            "image": "",
+            "image": "/assets/quiz-khnure/19-answers.webp",
+            "tile": 2,
             "correct": false,
             "color": "#54dcb0"
           },
           {
             "text": "Усі перелічені варіанти",
-            "image": "",
+            "image": "/assets/quiz-khnure/19-answers.webp",
+            "tile": 3,
             "correct": true,
             "color": "#b695ff"
           }
