@@ -1389,7 +1389,7 @@
       },
       {
         "text": "Студента «Інформаційних радіотехнологій» попросили полагодити пульт. Він постукав ним об долоню та вийняв і вставив ті самі батарейки.",
-        "image": "/assets/quiz-khnure/08-question.webp",
+        "image": "/assets/quiz-khnure/08-question-single.webp",
         "time": 20,
         "answers": [
           {
@@ -1677,7 +1677,7 @@
       },
       {
         "text": "Ваш ліхтарик тьмяно світить. Як під’єднати вольтметр, щоб виміряти напругу на лампі?",
-        "image": "/assets/quiz-khnure/16-question.webp",
+        "image": "/assets/quiz-khnure/16-question-single.webp",
         "time": 20,
         "answers": [
           {
@@ -1749,7 +1749,7 @@
       },
       {
         "text": "Студенти освітньої програми «Медіаінженерія» вміють:",
-        "image": "/assets/quiz-khnure/18-question.webp",
+        "image": "/assets/quiz-khnure/18-question-single.webp",
         "time": 20,
         "answers": [
           {
@@ -1785,7 +1785,7 @@
       },
       {
         "text": "Зараз ви перебуваєте в суперуніверситеті ХНУРЕ. У кого можна дізнатися інформацію про вступ до нього?",
-        "image": "/assets/quiz-khnure/19-question.webp",
+        "image": "/assets/quiz-khnure/19-question-single.webp",
         "time": 20,
         "answers": [
           {
