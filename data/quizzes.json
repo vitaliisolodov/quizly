@@ -1124,5 +1124,692 @@
         ]
       }
     ]
+  },
+  {
+    "id": "khnure-programs-quiz-19",
+    "title": "Six-Seven FM – налаштуйся на ІРТМ",
+    "subtitle": "Мультимедіа, радіотехнології, електроніка • 19 запитань",
+    "theme": {
+      "accent": "#8b5cf6",
+      "surface": "#17143b",
+      "background": "#0d0b24"
+    },
+    "questions": [
+      {
+        "text": "Сусід слухає музику о 3-й ночі на безпроводовій колонці. Який пристрій допоможе в цій ситуації?",
+        "image": "/assets/quiz-kahoot/1-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "Глушилка (джаммер)",
+            "image": "/assets/quiz-kahoot/1-answers.webp",
+            "tile": 3,
+            "correct": true,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Перфоратор із Wi-Fi",
+            "image": "/assets/quiz-kahoot/1-answers.webp",
+            "tile": 0,
+            "correct": false,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Підсилювач басів",
+            "image": "/assets/quiz-kahoot/1-answers.webp",
+            "tile": 2,
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Лазерний глушник для вух",
+            "image": "/assets/quiz-kahoot/1-answers.webp",
+            "tile": 1,
+            "correct": false,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Який суперпароль страшенно люблять хакери (особливо голлівудські, що зламують навіть супутники)?",
+        "image": "/assets/quiz-kahoot/2-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "12345",
+            "image": "/assets/quiz-kahoot/2-answers.webp",
+            "tile": 3,
+            "correct": true,
+            "color": "#f28aad"
+          },
+          {
+            "text": "nure_the_best_2026",
+            "image": "/assets/quiz-kahoot/2-answers.webp",
+            "tile": 0,
+            "correct": false,
+            "color": "#ffc857"
+          },
+          {
+            "text": "qwerty_super_god_mode",
+            "image": "/assets/quiz-kahoot/2-answers.webp",
+            "tile": 2,
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "X$9#mK2!vP",
+            "image": "/assets/quiz-kahoot/2-answers.webp",
+            "tile": 1,
+            "correct": false,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Студенти освітньої програми «Системи, технології і комп’ютерні засоби мультимедіа» вміють:",
+        "image": "/assets/quiz-khnure/03-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "Розробляти 3D-персонажів та оточення",
+            "image": "/assets/quiz-khnure/03-answers.webp",
+            "tile": 0,
+            "correct": false,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Створювати дизайн не тільки приміщень",
+            "image": "/assets/quiz-khnure/03-answers.webp",
+            "tile": 1,
+            "correct": false,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Знімати та монтувати звук і відео",
+            "image": "/assets/quiz-khnure/03-answers.webp",
+            "tile": 2,
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Усе разом і навіть більше",
+            "image": "/assets/quiz-khnure/03-answers.webp",
+            "tile": 3,
+            "correct": true,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Серед радіотехніків існує жарт: «Будь-яка електронна деталь працює на білому димі. Якщо дим вийшов — деталь зламалася».",
+        "image": "/assets/quiz-kahoot/3-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "З мікросхеми вилітає дух Ніколи Тесли",
+            "image": "/assets/quiz-kahoot/3-answers.webp",
+            "tile": 0,
+            "correct": false,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Оновлення прошивки до версії PRO",
+            "image": "/assets/quiz-kahoot/3-answers.webp",
+            "tile": 3,
+            "correct": false,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Активація режиму бездротової зарядки",
+            "image": "/assets/quiz-kahoot/3-answers.webp",
+            "tile": 1,
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Перегрів та термічне руйнування від перевищення струму",
+            "image": "/assets/quiz-kahoot/3-answers.webp",
+            "tile": 2,
+            "correct": true,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Чому сучасний медіаінженер має знати Python або C++, якщо він хоче створювати круті спецефекти для кіно чи ігор?",
+        "image": "/assets/quiz-kahoot/18-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "Щоб писати гнівні коментарі розробникам графічних редакторів",
+            "image": "/assets/quiz-khnure/05-answers.webp",
+            "tile": 0,
+            "correct": false,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Бо без знання коду комп'ютер просто згорить від обсягу 3D-файлів",
+            "image": "/assets/quiz-khnure/05-answers.webp",
+            "tile": 1,
+            "correct": false,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Щоб створювати власні плагіни",
+            "image": "/assets/quiz-khnure/05-answers.webp",
+            "tile": 2,
+            "correct": true,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Автоматизувати рендер та писати кастомні шейдери для генеративної графіки",
+            "image": "/assets/quiz-khnure/05-answers.webp",
+            "tile": 3,
+            "correct": true,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Студент освітньої програми «Радіоінженерія інформаційної безпеки» заклеїв вебкамеру на ноутбуці синьою ізолентою.",
+        "image": "/assets/quiz-kahoot/7-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "Цей метод називається Hardware Firewall v2.0",
+            "image": "/assets/quiz-kahoot/7-answers.webp",
+            "tile": 1,
+            "correct": false,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Цей метод називається фізичним розриванням оптичного каналу",
+            "image": "/assets/quiz-kahoot/7-answers.webp",
+            "tile": 3,
+            "correct": true,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Цей метод називається декоративним дизайном",
+            "image": "/assets/quiz-kahoot/7-answers.webp",
+            "tile": 2,
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Цей метод називається кіберосліпленням",
+            "image": "/assets/quiz-kahoot/7-answers.webp",
+            "tile": 0,
+            "correct": false,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Ви граєте у важку 3D-гру, і смартфон перетворюється на обігрівач. Це відбувається тому, що…",
+        "image": "/assets/quiz-kahoot/8-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "Тепло виділяється на мільярдах транзисторів процесора під час обчислень",
+            "image": "/assets/quiz-kahoot/8-answers.webp",
+            "tile": 2,
+            "correct": true,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Смартфон нагрівається від рук школяра",
+            "image": "/assets/quiz-kahoot/8-answers.webp",
+            "tile": 0,
+            "correct": false,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Активовано спеціальний режим «грілка для рук»",
+            "image": "/assets/quiz-kahoot/8-answers.webp",
+            "tile": 1,
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Процесор намагається підсмажити яєчню",
+            "image": "/assets/quiz-kahoot/8-answers.webp",
+            "tile": 3,
+            "correct": false,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Студента «Інформаційних радіотехнологій» попросили полагодити пульт. Він постукав ним об долоню та вийняв і вставив ті самі батарейки.",
+        "image": "/assets/quiz-khnure/08-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "Цей «високотехнологічний метод» називається квантовим перезавантаженням",
+            "image": "/assets/quiz-khnure/08-answers.webp",
+            "tile": 0,
+            "correct": false,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Це механічне відновлення контакту і трохи магії :) ",
+            "image": "/assets/quiz-khnure/08-answers.webp",
+            "tile": 1,
+            "correct": true,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Це називається калібруванням оптичного сенсора",
+            "image": "/assets/quiz-khnure/08-answers.webp",
+            "tile": 2,
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Це називається дефрагментацією батарейок",
+            "image": "/assets/quiz-khnure/08-answers.webp",
+            "tile": 3,
+            "correct": false,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Як розшифровується популярне маркування «FM» на радіоприймачах?",
+        "image": "/assets/quiz-kahoot/10-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "Fast Music (швидка музика)",
+            "image": "/assets/quiz-kahoot/10-answers.webp",
+            "tile": 0,
+            "correct": false,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Frequency Modulation (частотна модуляція)",
+            "image": "/assets/quiz-kahoot/10-answers.webp",
+            "tile": 2,
+            "correct": true,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Full Maximum (повний максимум)",
+            "image": "/assets/quiz-kahoot/10-answers.webp",
+            "tile": 3,
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Free Media (вільні медіа)",
+            "image": "/assets/quiz-kahoot/10-answers.webp",
+            "tile": 1,
+            "correct": false,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Ти хочеш, щоб світло на сцені чи медіаінсталяція реагували в реальному часі на твій голос або рух руки.",
+        "image": "/assets/quiz-kahoot/14-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "Кулінарне програмування на борщі",
+            "image": "/assets/quiz-kahoot/14-answers.webp",
+            "tile": 0,
+            "correct": false,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Креативне кодування та робота з інтерактивними медіаплатформами",
+            "image": "/assets/quiz-kahoot/14-answers.webp",
+            "tile": 1,
+            "correct": true,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Малювання крейдою на асфальті біля деканату",
+            "image": "/assets/quiz-kahoot/14-answers.webp",
+            "tile": 3,
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Перезавантаження роутера за розкладом",
+            "image": "/assets/quiz-kahoot/14-answers.webp",
+            "tile": 2,
+            "correct": false,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Яка головна перешкода для радіохвиль частотою 5 ГГц у звичайній квартирі?",
+        "image": "/assets/quiz-kahoot/5-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "Злі духи домашнього інтернету",
+            "image": "/assets/quiz-kahoot/5-answers.webp",
+            "tile": 2,
+            "correct": false,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Роутер просто втомився",
+            "image": "/assets/quiz-kahoot/5-answers.webp",
+            "tile": 1,
+            "correct": false,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Бетонні стіни з арматурою, які активно поглинають сигнал",
+            "image": "/assets/quiz-kahoot/5-answers.webp",
+            "tile": 0,
+            "correct": true,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Сигнал соромиться заходити до туалету",
+            "image": "/assets/quiz-kahoot/5-answers.webp",
+            "tile": 3,
+            "correct": false,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Студенти ОП «Електронні пристрої та системи» точно знають, чому, коли повернули смартфон, екран теж повернувся.",
+        "image": "/assets/quiz-kahoot/21-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "Це робить акселерометр",
+            "image": "/assets/quiz-kahoot/21-answers.webp",
+            "tile": 0,
+            "correct": true,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Магнітометр: Північ тепер праворуч",
+            "image": "/assets/quiz-kahoot/21-answers.webp",
+            "tile": 2,
+            "correct": false,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Датчик температури: телефону стало ніяково",
+            "image": "/assets/quiz-kahoot/21-answers.webp",
+            "tile": 1,
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Фронтальна камера: підглянула",
+            "image": "/assets/quiz-kahoot/21-answers.webp",
+            "tile": 3,
+            "correct": false,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Ти вмикаєш стрім, а твій голос звучить так, ніби ти записуєшся з дна кавоварки. Яка медіатехнологія рятує від цього?",
+        "image": "/assets/quiz-kahoot/11-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "Використати цифрову обробку сигналу, компресію та шумозаглушення",
+            "image": "/assets/quiz-kahoot/11-answers.webp",
+            "tile": 3,
+            "correct": true,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Повністю вимкнути звук і показувати меми на пальцях",
+            "image": "/assets/quiz-kahoot/11-answers.webp",
+            "tile": 0,
+            "correct": false,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Говорити голосніше за кулер твого ноутбука",
+            "image": "/assets/quiz-kahoot/11-answers.webp",
+            "tile": 2,
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Накрити мікрофон вовняною шкарпеткою (і сподіватися на магію)",
+            "image": "/assets/quiz-kahoot/11-answers.webp",
+            "tile": 1,
+            "correct": false,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Студента ОП «Мікро- та наноелектроніка» запитали, навіщо під час виготовлення мікросхем потрібне дуже чисте середовище?",
+        "image": "/assets/quiz-kahoot/27-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "Щоб пил не забрав гігабайти",
+            "image": "/assets/quiz-kahoot/27-answers.webp",
+            "tile": 3,
+            "correct": false,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Частинки можуть спричинити дефекти мікроструктур",
+            "image": "/assets/quiz-kahoot/27-answers.webp",
+            "tile": 0,
+            "correct": true,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Щоб процесор не чхав",
+            "image": "/assets/quiz-kahoot/27-answers.webp",
+            "tile": 2,
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Щоб чип гарно виглядав на фото",
+            "image": "/assets/quiz-kahoot/27-answers.webp",
+            "tile": 1,
+            "correct": false,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Що таке «генеративне мистецтво» (Generative Art)?",
+        "image": "/assets/quiz-kahoot/19-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "Це мистецтво, яким зараз захоплюються медіаінженери та цифрові художники",
+            "image": "",
+            "correct": true,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Мистецтво, яке передається через генетику",
+            "image": "",
+            "correct": false,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Візуальний контент, який створюється в реальному часі на основі математичних алгоритмів",
+            "image": "",
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Коли ти випадково розлив каву на клавіатуру, і воно саме щось намалювало",
+            "image": "",
+            "correct": false,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Ваш ліхтарик тьмяно світить. Як під’єднати вольтметр, щоб виміряти напругу на лампі?",
+        "image": "/assets/quiz-khnure/16-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "До корпусу — для моральної підтримки",
+            "image": "/assets/quiz-khnure/16-answers.webp",
+            "tile": 0,
+            "correct": false,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Через Bluetooth",
+            "image": "/assets/quiz-khnure/16-answers.webp",
+            "tile": 1,
+            "correct": false,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Паралельно лампі",
+            "image": "/assets/quiz-khnure/16-answers.webp",
+            "tile": 2,
+            "correct": true,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Послідовно з лампою",
+            "image": "/assets/quiz-khnure/16-answers.webp",
+            "tile": 3,
+            "correct": false,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Який елемент безпосередньо перетворює світло на електричну енергію?",
+        "image": "/assets/quiz-kahoot/28-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "Фотоелектричний елемент",
+            "image": "/assets/quiz-kahoot/28-answers.webp",
+            "tile": 0,
+            "correct": true,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Звичайний конденсатор",
+            "image": "/assets/quiz-kahoot/28-answers.webp",
+            "tile": 1,
+            "correct": false,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Акумулятор у сонцезахисних окулярах",
+            "image": "/assets/quiz-kahoot/28-answers.webp",
+            "tile": 2,
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Кабель із сонячною підпискою",
+            "image": "/assets/quiz-kahoot/28-answers.webp",
+            "tile": 3,
+            "correct": false,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Студенти освітньої програми «Медіаінженерія» вміють:",
+        "image": "/assets/quiz-khnure/18-question.webp",
+        "time": 20,
+        "answers": [
+          {
+            "text": "Створювати 3D-персонажів",
+            "image": "/assets/quiz-khnure/18-answers.webp",
+            "tile": 0,
+            "correct": false,
+            "color": "#f28aad"
+          },
+          {
+            "text": "Створювати саунд-дизайн",
+            "image": "/assets/quiz-khnure/18-answers.webp",
+            "tile": 1,
+            "correct": false,
+            "color": "#ffc857"
+          },
+          {
+            "text": "Знімати та монтувати відео",
+            "image": "/assets/quiz-khnure/18-answers.webp",
+            "tile": 2,
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Усе разом",
+            "image": "/assets/quiz-khnure/18-answers.webp",
+            "tile": 3,
+            "correct": true,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      },
+      {
+        "text": "Зараз ви перебуваєте в суперуніверситеті ХНУРЕ. У кого можна дізнатися інформацію про вступ до нього?",
+        "time": 20,
+        "answers": [
+          {
+            "text": "У приймальній комісії та на сайті",
+            "image": "",
+            "correct": false,
+            "color": "#f28aad"
+          },
+          {
+            "text": "У відповідальної за вступ Колендовської Марини за тел. +380 50 401 20 27",
+            "image": "",
+            "correct": false,
+            "color": "#ffc857"
+          },
+          {
+            "text": "У декана Дениса Горелова за тел. +380 67 572 79 95",
+            "image": "",
+            "correct": false,
+            "color": "#54dcb0"
+          },
+          {
+            "text": "Усі перелічені варіанти",
+            "image": "",
+            "correct": true,
+            "color": "#b695ff"
+          }
+        ],
+        "readTime": 10
+      }
+    ]
   }
 ]
